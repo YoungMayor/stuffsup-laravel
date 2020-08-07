@@ -1,0 +1,66 @@
+#sidenav {
+  transition: all .3s ease-in;
+  z-index: 12;
+}
+
+#sidenav #sidenav-menu {
+  position: sticky;
+  top: 0;
+}
+
+#sidebarToggleTop {
+  /*top: 0;*/
+  /*position: fixed;*/
+  /*z-index: 999;*/
+}
+
+.readmoni_icon {
+  width: 60%;
+  height: 60%;
+}
+
+#content-wrapper {
+  z-index: 10;
+}
+
+#accordionSidebar {
+  padding-top: 70px !important;
+}
+
+#topBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+#pageBody {
+  margin-top: 80px;
+}
+
+.h-list {
+  display: flex;
+  overflow-x: auto;
+  /*padding: 0 5px;*/
+}
+
+.h-list > * {
+  flex-shrink: 0;
+}
+
+.m-320 {
+  max-width: 320px;
+  margin: auto;
+}
+
+.place-center {
+  margin: auto;
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
+#scroll-to-top {
+  z-index: 10;
+}
+
