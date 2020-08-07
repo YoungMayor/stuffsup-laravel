@@ -13,7 +13,16 @@
         @include('layouts.mixins.styles')
     </head>
 
-    <body class="bg-gradient-primary">
+    <body class="{{ [
+        'bg-gradient-primary',
+        'bg-gradient-secondary',
+        'bg-gradient-success',
+        'bg-gradient-danger',
+        'bg-gradient-warning',
+        'bg-gradient-info',
+        'bg-gradient-dark',
+        'bg-gradient-light',
+    ][rand(0, 7)] }}">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-9 col-lg-12 col-xl-10">

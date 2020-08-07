@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __invoke(Request $request)
     {
-        $this->middleware('auth');
+        if (Auth::check()) {
+            return redirect()->route("hub.all.get");
+        }
+        return $this->home();
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function home()
     {
-        return view('home');
+        return view(RouteServiceProvider::VIEWS['landing']);
     }
 }

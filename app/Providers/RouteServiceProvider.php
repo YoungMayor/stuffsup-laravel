@@ -23,6 +23,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+    public const VIEWS = [
+        'landing' => 'welcome',
+        '404' => '404'
+    ];
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
