@@ -11,9 +11,10 @@
         <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
         @include('layouts.mixins.styles')
+        @stack('styles')
     </head>
 
-    <body class="page-top">
+    <body id="page-top">
         @include('layouts.plugins.filter_modal')
 
         <div id="wrapper">
@@ -49,4 +50,5 @@
 
     @include('layouts.mixins.scripts')
     @js(theme)
+    @stack('scripts')
 </html>

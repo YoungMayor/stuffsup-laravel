@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Welcome Page
+    Page Not Found
 @endsection
 
 @section('content')

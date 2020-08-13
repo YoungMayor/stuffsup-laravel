@@ -33,8 +33,20 @@ class ViewSharesServiceProvider extends ServiceProvider
             [
                 'label' => 'Store',
                 'icon' => 'fas fa-store-alt',
-                'route' => 'home'
-            ]
+                'route' => 'store'
+            ],
+            [
+                'label' => 'Filter',
+                'icon' => 'fas fa-filter',
+                'route' => 'market_filter_modal',
+                'more' => "data-toggle='modal' data-target='#market_filter_modal'"
+            ],
+            [
+                'label' => 'Sell',
+                'icon' => 'fas fa-plus',
+                'route' => 'sell',
+                'auth' => true
+            ],
         ]);
     }
 }

@@ -177,6 +177,13 @@ return [
         App\Providers\HTMLServiceProvider::class,
         App\Providers\ViewSharesServiceProvider::class,
         App\Providers\StateMapServiceProvider::class,
+        App\Providers\ItemCategoryServiceProvider::class,
+
+
+        /**
+         * 3rd Party Service Providers
+         */
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -230,6 +237,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        'Image' => Intervention\Image\Facades\Image::class,
+        'SalesImage' => App\Facades\SalesImage::class
     ],
 
 ];

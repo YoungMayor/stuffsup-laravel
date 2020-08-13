@@ -146,6 +146,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'Sales Title',
+        'phone' => 'Phone Number',
+        'amount' => 'Sales Amount',
+        'description' => 'Sales Description',
+        'category' => 'Item Category',
+        'location' => 'Delivery Location',
+        'attachment' => 'Item Picture',
+        'location.*.state' => 'Delivery Location\'s State',
+        'location.*.region' => 'Delivery Location\'s Region',
+        'attachment.*.caption' => 'Item\'s picture caption',
+        'attachment.*.image' => 'Item\'s image file',
+    ],
 
 ];

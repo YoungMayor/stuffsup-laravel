@@ -19,6 +19,11 @@ Auth::routes(['verify' => true]);
 Route::get("/", "HomeController")->name("index");
 Route::get("/home", 'HomeController@home')->name("home");
 
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/sell', 'SaleController@showForm')->name('sell');
+    Route::post('/sell', 'SaleController@saveSale')->name('sell');
+});
+
 
 Route::fallback(function(){
     return view(RouteServiceProvider::VIEWS['404']);

@@ -7,29 +7,33 @@ use Illuminate\Support\ServiceProvider;
 
 class StateMapServiceProvider extends ServiceProvider
 {
+    public static $___valid_map_sample = [
+        'state' => '10'
+    ];
+
     public static $___state_map = [
         '10' => [
             'name' => "Abia",
             'lga' => [
-                '1010' => 'Umuahia'
+                '10' => 'Umuahia'
             ]
         ],
         '11' => [
             'name' => 'Adamawa',
             'lga' => [
-                '1110' => 'Yola'
+                '10' => 'Yola'
             ]
         ],
         '12' => [
             'name' => 'Akwa Ibom',
             'lga' => [
-                '1210' => 'Uyo'
+                '10' => 'Uyo'
             ]
         ],
         '13' => [
             'name' => 'Anambra',
             'lga' => [
-                '1310' => 'Akwa'
+                '10' => 'Akwa'
             ]
         ],
     ];

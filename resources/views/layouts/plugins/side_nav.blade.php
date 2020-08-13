@@ -3,32 +3,8 @@
         <ul class="nav navbar-nav text-light" id="accordionSidebar">
 
             @foreach ($___side_nav_menus as $menu)
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link
-                            {{
-                                url()->current() == route($menu['route'])
-                                ? 'active'
-                                : ''
-                            }}"
-                        href="{{ route($menu['route']) }}">
-                        <i class="{{ $menu['icon'] }}"></i>
-                        <span>
-                            {{ $menu['label'] }}
-                        </span>
-                    </a>
-                </li>
+                <x-side-nav-item :menu="$menu"></x-side-nav-item>
             @endforeach
-
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    data-toggle="modal"
-                    data-target="#market_filter_modal">
-                    <i class="fas fa-filter"></i>
-                    <span>Filter</span>
-                </a>
-            </li>
         </ul>
 
         <div class="text-center d-none d-md-inline">
