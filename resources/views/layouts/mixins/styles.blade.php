@@ -6,3 +6,4 @@
 
 @Font_ALL()
 @css(general)
+@css(animate.min)

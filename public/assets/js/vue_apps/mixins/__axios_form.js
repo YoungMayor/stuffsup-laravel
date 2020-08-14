@@ -1,8 +1,14 @@
-// import axiosFormWithValidatorErrors from "../components/general/axios-form-with-validator-errors.js";
+import AxiosError from "../components/AxiosError.js";
 
 export default {
     components: {
-        // 'error-bag': axiosFormWithValidatorErrors
+        'axios-error': AxiosError
+    },
+
+    data: function() {
+        return {
+            validate_errors: {}
+        }
     },
 
     methods: {
@@ -37,7 +43,7 @@ export default {
                 switch (error_status) {
                     case 422:
                     case "422":
-                        bar.error422(error_data)
+                        bar.error422(error_data, formElement)
                         break;
 
                     default:
@@ -45,13 +51,11 @@ export default {
                         break;
                 }
             }).finally(function() {
-                if (formElement.dataset.loader && formElement.dataset.loader.length > 1) {
-                    bar[formElement.dataset.loader] = false;
-                }
+                bar.toogleDisable(formElement, false);
             });
         },
 
-        defaultBefore(formElement) {
+        defaultBefore(formObject) {
             var bar = this;
 
             $.notify({
@@ -64,19 +68,20 @@ export default {
                 delay: 2000
             });
 
-            if (formElement.dataset.loader && formElement.dataset.loader.length > 1) {
-                bar[formElement.dataset.loader] = true;
-            }
-
             if (typeof(bar.validate_errors) == "object") {
                 for (const bag in bar.validate_errors) {
-                    /* if (bar.validate_errors.hasOwnProperty(bag)) {
-                        const element = bar.validate_errors[bag];
-                        //
-                    } */
-                    bar.validate_errors[bag] = [];
+                    bar.$delete(bar.validate_errors, bag);
                 }
             }
+
+            for (const key in formObject.elements) {
+                if (formObject.elements.hasOwnProperty(key)) {
+                    const element = formObject.elements[key];
+                    element.classList.remove('border-danger', 'shake', 'animated')
+                }
+            }
+
+            bar.toogleDisable(formObject, true);
         },
 
         defaultSuccess(data) {
@@ -102,6 +107,17 @@ export default {
             });
         },
 
+        toogleDisable: function(formObject, state) {
+            let form_elements = formObject.elements;
+
+            for (const key in form_elements) {
+                if (form_elements.hasOwnProperty(key)) {
+                    const form_field = form_elements[key];
+                    form_field.disabled = state;
+                }
+            }
+        },
+
         defaultError(data) {
             var message = "An error was encountered with your request";
             var title = "Error!!!";
@@ -125,14 +141,18 @@ export default {
             });
         },
 
-        error422(data) {
+        error422(data, formObject) {
             let bar = this;
 
             if (data.errors && bar.validate_errors) {
                 for (const error_bag in data.errors) {
-                    if (bar.validate_errors.hasOwnProperty(error_bag)) {
-                        bar.validate_errors[error_bag] = data.errors[error_bag]
+                    if (!bar.validate_errors.hasOwnProperty(error_bag)) {
+                        bar.$set(bar.validate_errors, error_bag, [])
                     }
+
+                    bar.validate_errors[error_bag] = data.errors[error_bag];
+                    formObject.elements[error_bag].classList.remove('border-0')
+                    formObject.elements[error_bag].classList.add('border-danger', 'border', 'shake', 'animated')
                 }
             }
         }

@@ -60,7 +60,7 @@
                                 {{ old('remember') ? 'checked' : '' }}>
 
                             <label class="form-check-label custom-control-label"
-                                for="remember_me_check">
+                                for="remember">
                                 {{ __('Remembe Me') }}
                             </label>
                         </div>

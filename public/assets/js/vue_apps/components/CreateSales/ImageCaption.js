@@ -157,6 +157,7 @@ export default {
                 <input
                     class="d-none"
                     type="file"
+                    :id="'attachment['+index+'][image]'"
                     :name="'attachment['+index+'][image]'"
                     required="required"
                     accept="image/*"
@@ -175,6 +176,7 @@ export default {
                 <input
                     class="form-control"
                     type="text"
+                    :id="'attachment['+index+'][caption]'"
                     :name="'attachment['+index+'][caption]'"
                     required="required"
                     placeholder="Caption for this image">

@@ -16,11 +16,6 @@ Window.CREATESALE = new Vue({
     },
 
     data: {
-        submitting_form: false,
-        validate_errors: {
-            //
-        },
-
         category_selections: [],
 
         locations: [
@@ -39,7 +34,6 @@ Window.CREATESALE = new Vue({
             let selection = Window.Categories;
 
             if (this.category_selections.length < 1) {
-                console.log('min')
                 return selection
             }
 
@@ -80,6 +74,7 @@ Window.CREATESALE = new Vue({
                 id: selected_field.dataset.id,
                 label: selected_field.dataset.label
             });
+            e.target.selectedIndex = 0;
         },
 
         addLocation: function() {

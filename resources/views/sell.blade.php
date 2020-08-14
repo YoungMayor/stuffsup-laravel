@@ -107,20 +107,16 @@ New Sale
 
                 <div class="col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a @click.prevent="categoryBack(-1)"
-                                href="#">
-                                <span>
-                                    Root
-                                </span>
-                            </a>
+                        <li class="fa m-1">
+                            <a
+                                @click.prevent="categoryBack(-1)"
+                                class="fa fa-home"
+                                href="#"></a>
                         </li>
                         <li
                             v-for="(category, index) in category_selections"
-                            class="breadcrumb-item">
-                            <a
-                                @click.prevent="categoryBack(index)"
-                                href="#">
+                            class="fa fa-chevron-right m-1">
+                            <a @click.prevent="categoryBack(index)">
                                 <span>
                                     @{{ category.label }}
                                 </span>
@@ -146,7 +142,7 @@ New Sale
                         class="custom-select"
                         @change="selectThis"
                         required="">
-                        <option></option>
+                        <option label="Select Category" selected></option>
 
                         <option
                             v-for="details, key in current_selection"
@@ -183,12 +179,15 @@ New Sale
 
                                 <select
                                     class="custom-select rounded-pill shadow-none border-0"
+                                    :id="`location[${index}][state]`"
                                     :name="`location[${index}][state]`">
-                                    <option
-                                        v-for="details, key in Window.States"
-                                        :value="key">
-                                        @{{ details.name }}
-                                    </option>
+                                    <optgroup label="Select State">
+                                        <option
+                                            v-for="details, key in Window.States"
+                                            :value="key">
+                                            @{{ details.name }}
+                                        </option>
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -266,6 +265,10 @@ New Sale
                 </div>
             </div>
             <!-- End: Attachments Row -->
+
+            <axios-error
+                :errors="validate_errors"
+            ></axios-error>
 
             <div class="form-group text-right mt-5">
                 <button class="btn btn-primary" type="submit">
