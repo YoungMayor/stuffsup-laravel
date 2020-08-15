@@ -19,6 +19,9 @@ Auth::routes(['verify' => true]);
 Route::get("/", "HomeController")->name("index");
 Route::get("/home", 'HomeController@home')->name("home");
 
+Route::get('/market/{type?}', 'SaleController@showMarket')->name('market');
+Route::post('/market/{type?}', 'SaleController@getSales')->name('market');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('sell');
     Route::post('/sell', 'SaleController@saveSale')->name('sell');

@@ -12,6 +12,11 @@
 
         @include('layouts.mixins.styles')
         @stack('styles')
+
+        <script>
+            Window.Categories = @json($___categories);
+            Window.States = @json($___state_map);
+        </script>
     </head>
 
     <body id="page-top">

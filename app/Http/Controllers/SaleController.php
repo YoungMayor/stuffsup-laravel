@@ -53,4 +53,14 @@ class SaleController extends Controller
             'msg' => 'Sales was successful',
         ], 201);
     }
+
+    public function showMarket(Request $request, $type = "all")
+    {
+        //
+    }
+
+    public function getSales(Request $request, $type = "all")
+    {
+        //
+    }
 }
