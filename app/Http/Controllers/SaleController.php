@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Facades\SalesImage as FacadesSalesImage;
 use App\Http\Requests\SaveSale;
+use App\Http\Resources\SaleCollection;
 use App\Providers\RouteServiceProvider;
 use App\Sale;
-use App\SalesImage;
-use App\SalesLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,11 +55,26 @@ class SaleController extends Controller
 
     public function showMarket(Request $request, $type = "all")
     {
-        //
+        return view(RouteServiceProvider::VIEWS['market'], []);
     }
 
     public function getSales(Request $request, $type = "all")
     {
-        //
+        $item_obj = new Sale;
+        if ($request->state || (Auth::check() && Auth::user()->profile->state)){
+            $item_obj = $item_obj->fromState($request->state ?? Auth::user()->profile->state);
+        }
+        if ($request->category){
+            $item_obj = $item_obj->inCategory($request->category);
+        }
+        if ($request->search){
+            $item_obj = $item_obj->searchFor($request->search);
+        }
+        if (!$request->hasAny(['state', 'category', 'search'])){
+            //
+        }
+        $item_obj = $item_obj->loadAll();
+
+        return new SaleCollection($item_obj->paginate(3));
     }
 }

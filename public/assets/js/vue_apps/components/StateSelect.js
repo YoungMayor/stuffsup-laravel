@@ -48,6 +48,9 @@ export default {
         :id="name"
         :name="name"
         :required="required">
+        <option value="0">
+            Nationwide
+        </option>
         <optgroup label="Select State">
             <option
                 v-for="details, key in Window.States"

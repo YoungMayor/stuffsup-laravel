@@ -45,4 +45,12 @@ class SalesImage extends Model
             'preview' => $this->getPreviewURLAttribute()
         ];
     }
+
+    public function getImageMetaAttribute()
+    {
+        return [
+            'caption' => $this->caption,
+            'links' => $this->all_url
+        ];
+    }
 }

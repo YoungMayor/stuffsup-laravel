@@ -33,7 +33,7 @@ class ViewSharesServiceProvider extends ServiceProvider
             [
                 'label' => 'Store',
                 'icon' => 'fas fa-store-alt',
-                'route' => 'store'
+                'route' => 'market'
             ],
             [
                 'label' => 'Filter',

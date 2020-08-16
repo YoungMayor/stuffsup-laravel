@@ -64,6 +64,41 @@ class Sale extends Model
         return $query->where('is_open', 0);
     }
 
+    public function scopeFromState($query, $location)
+    {
+        $query = $query
+            ->join('sales_locations', 'sales.id', 'sales_locations.item_id')
+            ->select('*', 'sales.created_at as created_at');
+
+        if ($location == "0"){
+            return $query;
+        }else{
+            return $query->where('sales_locations.state', $location);
+        }
+    }
+
+    public function scopeInCategory($query, $category)
+    {
+        return $query->where('sales.category', 'LIKE', "$category%");
+    }
+
+    public function scopeSearchFor($query, $search)
+    {
+        return $query
+            ->where('sales.title', 'LIKE', "%$search%")
+            ->orWhere('sales.description', 'LIKE', "%$search%");
+    }
+
+    public function scopeLoadAll($query)
+    {
+        return $query->with([
+            'seller',
+            'seller.profile',
+            'images',
+            'locations'
+        ]);
+    }
+
 
     /**
      * Accessors
@@ -72,6 +107,15 @@ class Sale extends Model
     {
         $category_id = $this->category;
         return self::categoryToName($category_id);
+    }
+
+    public function getMainImageAttribute()
+    {
+        if ($this->images->all()){
+            return $this->images()->first()->image_meta;
+        }else{
+            return null;
+        }
     }
 
 

@@ -64,7 +64,7 @@
             <a class="d-flex align-items-center dropdown-item" href="#">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle"
-                        src="assets/img/avatars/avatar4.jpeg?h=fefb30b61c8459a66bd338b7d790c3d5">
+                        src="@imgURL(avatars/avatar4.jpeg)">
                     <div class="bg-success status-indicator"></div>
                 </div>
                 <div class="font-weight-bold">
@@ -78,7 +78,7 @@
             <a class="d-flex align-items-center dropdown-item" href="#">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle"
-                        src="assets/img/avatars/avatar2.jpeg?h=5d142be9441885f0935b84cf739d4112">
+                        src="@imgURL(avatars/avatar2.jpeg)">
                     <div class="status-indicator"></div>
                 </div>
                 <div class="font-weight-bold">
@@ -91,7 +91,7 @@
             <a class="d-flex align-items-center dropdown-item" href="#">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle"
-                        src="assets/img/avatars/avatar3.jpeg?h=c5166867f10a4e454b5b2ae8d63268b3">
+                        src="@imgURL(avatars/avatar3.jpeg)">
                     <div class="bg-warning status-indicator"></div>
                 </div>
                 <div class="font-weight-bold">
@@ -105,7 +105,7 @@
             <a class="d-flex align-items-center dropdown-item" href="#">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle"
-                        src="assets/img/avatars/avatar5.jpeg?h=35dc45edbcda6b3fc752dab2b0f082ea">
+                        src="@imgURL(avatars/avatar5.jpeg)">
                     <div class="bg-success status-indicator"></div>
                 </div>
                 <div class="font-weight-bold">
@@ -132,7 +132,7 @@
             aria-expanded="false" type="button">
             <span class="text-white d-none d-lg-inline mr-2 small">Meyoron Aghogho</span>
             <img class="border rounded-circle img-profile"
-                src="assets/img/profile.jpg?h=752636603b0581e482dfed303d75f9d6"
+                src="@imgURL(profile.jpg)"
                 style="width: 48px;height: 48px;">
         </button>
         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
