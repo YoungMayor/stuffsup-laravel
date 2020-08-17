@@ -26,7 +26,7 @@ class Sale extends JsonResource
             'title' => $this->title,
             'desc' => substr($this->description, 0, 128),
             'image' => $this->main_image['links']['preview'],
-            'image_count' => $this->images()->count(),
+            'image_count' => $this->images_count,
             'phone' => $this->phone,
             'posted' => [
                 'date' => $this->created_at->format('M jS, Y'),
@@ -40,13 +40,10 @@ class Sale extends JsonResource
                 # @todo Build User Profile Page
             ],
             'link' => '#',
-            $this->mergeWhen($this->is_public, [
-                'offers' => 12
-            ]),
+            'offers' => $this->offers_count,
+            'public' => $this->is_public,
             $this->mergeWhen(Auth::check(), [
-                'quick' => '#'
-                # Offer system not yet built
-                # @todo build offers system
+                'quick' => $this->create_offer_link
             ])
         ];
     }

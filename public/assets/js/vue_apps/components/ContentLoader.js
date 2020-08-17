@@ -73,7 +73,7 @@ export default {
     },
 
     mounted: function() {
-        //
+        this.retrieve()
     },
 
     template: `

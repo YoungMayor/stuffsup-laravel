@@ -21,6 +21,11 @@ class Sale extends Model
 
     protected $guarded = [];
 
+    public function getRouteKeyName()
+    {
+        return 'token';
+    }
+
 
     /**
      * Relationships
@@ -38,6 +43,11 @@ class Sale extends Model
     public function locations()
     {
         return $this->hasMany('App\SalesLocation', 'item_id', 'id');
+    }
+
+    public function offers()
+    {
+        return $this->hasMany('App\Offer', 'item_id', 'id');
     }
 
 
@@ -96,6 +106,10 @@ class Sale extends Model
             'seller.profile',
             'images',
             'locations'
+        ])->withCount([
+            'offers',
+            'images',
+            'locations'
         ]);
     }
 
@@ -116,6 +130,13 @@ class Sale extends Model
         }else{
             return null;
         }
+    }
+
+    public function getCreateOfferLinkAttribute()
+    {
+        return route('offer.create', [
+            'item' => $this->token
+        ]);
     }
 
 

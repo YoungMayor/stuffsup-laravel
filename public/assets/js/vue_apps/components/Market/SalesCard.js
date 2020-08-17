@@ -1,4 +1,10 @@
+import CreateOffer from "../Item/CreateOffer.js";
+
 export default {
+    components: {
+        'create-offer': CreateOffer
+    },
+
     mixins: [
         //
     ],
@@ -118,7 +124,7 @@ export default {
                             </td>
                         </tr>
 
-                        <template v-if="item.offers">
+                        <template v-if="item.public">
                             <tr>
                                 <td>
                                     <i class="fas fa-mail-bulk"></i>
@@ -135,7 +141,7 @@ export default {
 
                                 <td>
                                     <span class="badge badge-pill badge-secondary">
-                                        {{ item.offers }}
+                                        {{ item.offers }} offer(s)
                                     </span>
                                 </td>
                             </tr>
@@ -184,33 +190,11 @@ export default {
                 </button>
             </div>
 
-            <form
-                :action="item.quick"
-                method="POST"
-                class="m-0"
+            <create-offer
                 v-if="item.quick"
-                v-show="show_quick_offer">
-                <div class="form-group text-muted bg-light border rounded shadow-sm rounded-lg p-1 m-0">
-                    <label
-                        class="small m-0 font-weight-bold"
-                        for="offer">
-                        Your offer
-                    </label>
-
-                    <textarea
-                        class="form-control form-control-sm"
-                        name="offer"
-                        placeholder="Enter your quick offer for this item.."
-                        rows="3"
-                        required=""></textarea>
-
-                    <button
-                        class="btn btn-success btn-sm ml-auto d-block"
-                        type="submit">
-                        Send
-                    </button>
-                </div>
-            </form>
+                v-show="show_quick_offer"
+                :target="item.quick"
+            ></create-offer>
         </div>
     </div>
 </div>

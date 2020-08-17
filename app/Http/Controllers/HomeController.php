@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route("hub.all.get");
+            return redirect()->route("home");
         }
         return $this->home();
     }

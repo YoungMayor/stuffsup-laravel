@@ -25,6 +25,8 @@ Route::post('/market/{type?}', 'SaleController@getSales')->name('market');
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('sell');
     Route::post('/sell', 'SaleController@saveSale')->name('sell');
+
+    Route::post('/item_{item}/create_offer', 'OfferController@createOffer')->name('offer.create');
 });
 
 
