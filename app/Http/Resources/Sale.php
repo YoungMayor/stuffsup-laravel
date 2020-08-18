@@ -35,11 +35,11 @@ class Sale extends JsonResource
             'locations' => $locations,
             'seller' => [
                 'name' => $this->seller->profile->full_name,
-                'link' => '#'
+                'link' => $this->seller->user_link
                 #User Link not yet built
                 # @todo Build User Profile Page
             ],
-            'link' => '#',
+            'link' => $this->item_link,
             'offers' => $this->offers_count,
             'public' => $this->is_public,
             $this->mergeWhen(Auth::check(), [

@@ -44,7 +44,7 @@ export default {
                 .then(function(response) {
                     var data = response.data;
 
-                    if (data.links.next) {
+                    if (data.links && data.links.next) {
                         bar.target = data.links.next;
                     } else {
                         bar.list_ended = true;

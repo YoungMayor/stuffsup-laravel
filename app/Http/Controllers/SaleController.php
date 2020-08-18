@@ -73,8 +73,16 @@ class SaleController extends Controller
         if (!$request->hasAny(['state', 'category', 'search'])){
             //
         }
-        $item_obj = $item_obj->loadAll();
 
         return new SaleCollection($item_obj->paginate(3));
+    }
+
+
+
+    public function showItem(Request $request, Sale $item)
+    {
+        return view(RouteServiceProvider::VIEWS['item'], [
+            'item' => $item
+        ]);
     }
 }

@@ -60,4 +60,13 @@ class User  extends Authenticatable implements MustVerifyEmail
     /**
      * Methods
      */
+
+
+     /**
+      * Accessors
+      */
+    public function getUserLinkAttribute()
+    {
+        return "#";
+    }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Providers\ItemCategoryServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Sale extends Model
 {
@@ -18,6 +19,29 @@ class Sale extends Model
     ];
 
     // public $timestamps = false;
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'seller',
+        'seller.profile',
+        'images',
+        'locations'
+    ];
+
+    /**
+     * The relationship counts that should be eager loaded on every query.
+     *
+     * @var array
+     */
+    protected $withCount = [
+        'offers',
+        'images',
+        'locations'
+    ];
 
     protected $guarded = [];
 
@@ -78,7 +102,7 @@ class Sale extends Model
     {
         $query = $query
             ->join('sales_locations', 'sales.id', 'sales_locations.item_id')
-            ->select('*', 'sales.created_at as created_at');
+            ->addSelect('sales.created_at as created_at');
 
         if ($location == "0"){
             return $query;
@@ -97,20 +121,6 @@ class Sale extends Model
         return $query
             ->where('sales.title', 'LIKE', "%$search%")
             ->orWhere('sales.description', 'LIKE', "%$search%");
-    }
-
-    public function scopeLoadAll($query)
-    {
-        return $query->with([
-            'seller',
-            'seller.profile',
-            'images',
-            'locations'
-        ])->withCount([
-            'offers',
-            'images',
-            'locations'
-        ]);
     }
 
 
@@ -137,6 +147,25 @@ class Sale extends Model
         return route('offer.create', [
             'item' => $this->token
         ]);
+    }
+
+    public function getItemLinkAttribute()
+    {
+        return route('item', [
+            'item' => $this->token
+        ]);
+    }
+
+    public function getItemOffersLinkAttribute()
+    {
+        return route('item.offers', [
+            'item' => $this->token
+        ]);
+    }
+
+    public function getIAmSellerAttribute()
+    {
+        return Auth::check() && $this->seller_id == Auth::id();
     }
 
 

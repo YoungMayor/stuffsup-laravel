@@ -42,4 +42,9 @@ class Profile extends Model
     {
         return StateMapServiceProvider::$___state_map[$this->state]['name'];
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        return "/assets/img/profile.jpg";
+    }
 }

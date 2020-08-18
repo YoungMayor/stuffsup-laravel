@@ -12,6 +12,7 @@ class Offer extends Model
     protected $casts = [
         'created_at' => 'date',
         'updated_at' => 'date',
+        'closed' => 'boolean'
     ];
 
     // public $timestamps = false;
@@ -28,7 +29,7 @@ class Offer extends Model
         return $this->hasOne('App\Sale', 'id', 'item_id');
     }
 
-    public function from()
+    public function user()
     {
         return $this->hasOne('App\User', 'id', 'from');
     }
@@ -45,6 +46,10 @@ class Offer extends Model
     /**
      * Accessors
      */
+    public function getOfferLinkAttribute()
+    {
+        return "#";
+    }
 
 
 
