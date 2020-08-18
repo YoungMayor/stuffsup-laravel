@@ -74,7 +74,7 @@ class SaleController extends Controller
             //
         }
 
-        return new SaleCollection($item_obj->paginate(3));
+        return new SaleCollection($item_obj->latest()->paginate());
     }
 
 

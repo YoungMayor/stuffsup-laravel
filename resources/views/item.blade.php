@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
+@include('mixins.aos')
+
 @push('styles')
-@css(aos)
 @css(Article-Dual-Column)
 @endpush
 
@@ -155,11 +156,5 @@ Sales Details
 @endsection
 
 @push('scripts')
-@js(aos)
-<script>
-    AOS.init({
-        mirror: true
-    });
-</script>
 @js_m(vue_apps/item)
 @endpush

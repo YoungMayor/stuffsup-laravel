@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
+@include('mixins.aos')
+
 @push('styles')
-@css(aos)
+
 @endpush
 
 @section('title')
@@ -29,11 +31,5 @@ Market Place
 @endsection
 
 @push('scripts')
-@js(aos)
-<script>
-    AOS.init({
-        mirror: true
-    });
-</script>
 @js_m(vue_apps/market)
 @endpush

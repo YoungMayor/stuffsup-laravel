@@ -49,7 +49,7 @@ export default {
 
         <div
             v-if="item.image"
-            class="overflow-hidden position-relative">
+            class="overflow-hidden position-relative text-center">
             <img
                 class="img-fluid"
                 data-aos="fade-down"
