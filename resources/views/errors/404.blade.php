@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Page Not Found
+    Requested Resource Not Found
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
     </div>
 
     <p class="text-dark mb-5 lead">
-        Page Not Found
+        Requested Resource Not Found
     </p>
 
     <p class="text-black-50 mb-0">

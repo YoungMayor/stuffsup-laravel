@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public const VIEWS = [
         'landing' => 'welcome',
-        '404' => '404',
+        '404' => 'errors.404',
         'sell' => 'sell',
         'market' => 'market',
         'item' => 'item'
