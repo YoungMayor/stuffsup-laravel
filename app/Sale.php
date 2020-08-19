@@ -104,6 +104,8 @@ class Sale extends Model
             ->join('sales_locations', 'sales.id', 'sales_locations.item_id')
             ->addSelect('sales.created_at as created_at');
 
+        $query->where('sales_locations.state', '0');
+
         if ($location == "0"){
             return $query;
         }else{
