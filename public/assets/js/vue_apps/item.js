@@ -2,9 +2,10 @@ import Vue from './vue_eb.js'
 import CreateOffer from './components/Item/CreateOffer.js';
 import ContentLoader from './components/ContentLoader.js';
 import OffersCard from './components/Item/OffersCard.js';
+import PagePreload from './components/PagePreload.js';
 
 Window.ITEM = new Vue({
-    el: "#item-details",
+    el: "#sales-details",
 
     mixins: [
         //
@@ -13,7 +14,8 @@ Window.ITEM = new Vue({
     components: {
         'create-offer': CreateOffer,
         'content-loader': ContentLoader,
-        'offers-card': OffersCard
+        'offers-card': OffersCard,
+        'page-preload': PagePreload
     },
 
     data: {
@@ -21,11 +23,31 @@ Window.ITEM = new Vue({
             src: '',
             caption: ''
         },
-        offers: {}
+        offers: {},
+        page_details: {
+            title: '',
+            seller: {
+                link: '',
+                name: ''
+            },
+            posted: {
+                date: '',
+                time: ''
+            },
+            images: [],
+            phone: '',
+            locations: [],
+            is_public: false,
+            description: '',
+            new_offer: false,
+            get_offers: false
+        }
     },
 
     computed: {
-        //
+        negotiation_type_label: function() {
+            return this.page_details.is_public ? 'Public' : 'Private';
+        }
     },
 
     methods: {
@@ -39,10 +61,8 @@ Window.ITEM = new Vue({
                 paddingBottom: '100%'
             }
         },
-        loadImage: function(e) {
-            let image = e.target.dataset;
-
-            this.$set(this.opened_image, 'src', image.full);
+        loadImage: function(image) {
+            this.$set(this.opened_image, 'src', image.links.full);
             this.$set(this.opened_image, 'caption', image.caption);
         }
     },

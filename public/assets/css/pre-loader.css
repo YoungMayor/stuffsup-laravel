@@ -1,0 +1,50 @@
+#preloader {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+#preloader>* {
+    /*max-width: 330px;*/
+}
+
+#preloader .loader {
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.loader>* {
+    color: #fff;
+    mix-blend-mode: difference;
+}
+
+.loader:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: #000;
+    animation: preloader-animate 3s linear infinite;
+}
+
+@keyframes preloader-animate {
+    0% {
+        left: -20px;
+    }
+    75% {
+        left: calc(90% - 20px);
+    }
+    95% {
+        left: 50%;
+    }
+    100% {
+        left: 100%;
+    }
+}

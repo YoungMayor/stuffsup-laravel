@@ -23,6 +23,8 @@ Route::get('/market/{type?}', 'SaleController@showMarket')->name('market');
 Route::post('/market/{type?}', 'SaleController@getSales')->name('market');
 
 Route::get('/item_{item}', 'SaleController@showItem')->name('item');
+Route::post('/item_{item}', 'SaleController@getItemDetails')->name('item');
+
 Route::post('/item_{item}/offers', 'OfferController@getOffers')->name('item.offers');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

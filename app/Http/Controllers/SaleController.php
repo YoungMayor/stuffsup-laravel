@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\SalesImage as FacadesSalesImage;
 use App\Http\Requests\SaveSale;
+use App\Http\Resources\Item;
 use App\Http\Resources\SaleCollection;
 use App\Providers\RouteServiceProvider;
 use App\Sale;
@@ -84,5 +85,10 @@ class SaleController extends Controller
         return view(RouteServiceProvider::VIEWS['item'], [
             'item' => $item
         ]);
+    }
+
+    public function getItemDetails(Request $request, Sale $item)
+    {
+        return new Item($item);
     }
 }

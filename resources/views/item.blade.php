@@ -4,21 +4,26 @@
 
 @push('styles')
 @css(Article-Dual-Column)
+@css(pre-loader)
 @endpush
 
 @section('title')
 Sales Details
 @endsection
 
+
 @section('content')
-<!-- Start: Article Dual Column -->
-<div class="article-dual-column" id="item-details">
+<page-preload
+    :content="page_details"
+    id="sales-details"
+    class="article-dual-column"
+>
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <!-- Start: Intro -->
             <div class="intro">
                 <h1 class="text-center">
-                    {{ $item->title }}
+                    @{{ page_details.title }}
                 </h1>
 
                 <!-- Start: Date and Author -->
@@ -26,11 +31,11 @@ Sales Details
                     <span class="by">
                         by
                     </span>
-                    <a href="{{ $item->seller->user_link }}">
-                        {{ $item->seller->profile->full_name }}}}
+                    <a :href="page_details.seller.link">
+                        @{{ page_details.seller.name }}
                     </a>
                     <span class="d-inline-block date">
-                        {{ $item->created_at->format('M jS, Y - H:ia') }}
+                        @{{ page_details.posted.date }} - @{{ page_details.posted.time }}
                     </span>
                 </p>
                 <!-- End: Date and Author -->
@@ -46,18 +51,14 @@ Sales Details
 
                 <!-- Start: Item Image Previews -->
                 <div class="row no-gutters flex-row flex-nowrap overflow-auto">
-                    @foreach ($item->images as $image)
+                    <div
+                        class="col-3 col-sm-2 col-xl-1 p-1 shadow-sm bg-light"
+                        v-for="image in page_details.images">
                         <div
-                            class="col-3 col-sm-2 col-xl-1 p-1 shadow-sm bg-light">
-                            <div
-                                data-full="{{ $image->image_meta['links']['full'] }}"
-                                data-preview="{{ $image->image_meta['links']['preview'] }}"
-                                data-caption="{{ $image->image_meta['caption'] }}"
-                                @click="loadImage"
-                                :style="preview_style_object('{{ $image->image_meta['links']['preview'] }}')"
-                            ></div>
-                        </div>
-                    @endforeach
+                            @click="loadImage(image)"
+                            :style="preview_style_object(image.links.preview)"
+                        ></div>
+                    </div>
                 </div>
                 <!-- End: Item Image Previews -->
             </div>
@@ -78,9 +79,9 @@ Sales Details
                                 <a
                                     class="btn btn-outline-secondary btn-sm"
                                     role="button"
-                                    href="tel:{{ $item->phone }}"
+                                    :href="'tel:'+page_details.phone"
                                     target="_blank">
-                                    {{ $item->phone }}
+                                    @{{ page_details.phone }}
                                 </a>
                             </td>
                         </tr>
@@ -90,10 +91,10 @@ Sales Details
                                 <i class="fas fa-truck"></i>
                             </td>
                             <td>
-                                @foreach ($item->locations as $location)
-                                    {{ $location->state_name }} ({{ $location->location }})
-                                    <br/>
-                                @endforeach
+                                <template
+                                    v-for="location in page_details.locations">
+                                    @{{ location.state }} (@{{ location.location }}) <br/>
+                                </template>
                             </td>
                         </tr>
 
@@ -102,7 +103,7 @@ Sales Details
                                 <i class="fas fa-mail-bulk"></i>
                             </td>
                             <td>
-                                {{ $item->is_public ? 'Public' : 'Private' }}
+                                @{{ negotiation_type_label }}
                             </td>
                         </tr>
                     </tbody>
@@ -111,24 +112,23 @@ Sales Details
 
             <div class="overflow-hidden">
                 <p data-aos="zoom-in-up" data-aos-duration="1000">
-                    {!! $item->description !!}
+                    @{{ page_details.description }}
                 </p>
             </div>
         </div>
 
         <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">
-            @auth
-                <create-offer
-                    target="{{ $item->create_offer_link }}"
-                ></create-offer>
-            @endauth
+            <create-offer
+                v-if="page_details.new_offer"
+                :target="page_details.new_offer"
+            ></create-offer>
 
-            <h4 class="text-center">
-                Offers
-            </h4>
+            <!-- Start: Item offers -->
+            <template v-if="page_details.get_offers">
+                <h4 class="text-center">
+                    Offers
+                </h4>
 
-            @if ($item->is_public || $item->i_am_seller)
-                <!-- Start: Item offers -->
                 <div class="row">
                     <div class="col-12">
                         <offers-card
@@ -142,17 +142,14 @@ Sales Details
                         :list="offers"
                         icon="fas fa-mail-bulk"
                         label="More Offers"
-                        target="{{ $item->item_offers_link }}"
+                        :target="page_details.get_offers"
                     ></content-loader>
                 </div>
-                <!-- End: Item offers -->
-            @else
-
-            @endif
+            </template>
+            <!-- End: Item offers -->
         </div>
     </div>
-</div>
-<!-- End: Article Dual Column -->
+</page-preload>
 @endsection
 
 @push('scripts')
