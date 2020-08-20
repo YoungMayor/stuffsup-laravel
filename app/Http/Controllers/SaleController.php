@@ -8,6 +8,7 @@ use App\Http\Resources\Item;
 use App\Http\Resources\SaleCollection;
 use App\Providers\RouteServiceProvider;
 use App\Sale;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,7 +62,8 @@ class SaleController extends Controller
 
     public function getSales(Request $request, $type = "all")
     {
-        $item_obj = new Sale;
+        $item_obj = Sale::ongoingSales();
+
         if ($request->state || (Auth::check() && Auth::user()->profile->state)){
             $item_obj = $item_obj->fromState($request->state ?? Auth::user()->profile->state);
         }
@@ -90,5 +92,23 @@ class SaleController extends Controller
     public function getItemDetails(Request $request, Sale $item)
     {
         return new Item($item);
+    }
+
+
+
+    public function closeSale(Request $request, Sale $item, $token)
+    {
+        $user = User::find(Auth::id());
+        if ($user->generateToken('close sale') == $token){
+            $item->closeSales($request->reason);
+
+            return response()->json([
+                'msg' => "This sale has been closed"
+            ], 201);
+        }else{
+            return response()->json([
+                'msg' => "You do not have authorization to perform this action"
+            ], 403);
+        }
     }
 }

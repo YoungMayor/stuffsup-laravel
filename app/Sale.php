@@ -165,6 +165,14 @@ class Sale extends Model
         ]);
     }
 
+    public function getCloseSaleLinkAttribute()
+    {
+        return route('sale.close', [
+            'item' => $this->token,
+            'token' => $this->seller->generateToken('close sale')
+        ]);
+    }
+
     public function getIAmSellerAttribute()
     {
         return Auth::check() && $this->seller_id == Auth::id();
@@ -224,9 +232,11 @@ class Sale extends Model
     }
 
 
-    protected function changeSalesState($new)
+    protected function changeSalesState($new, $reason = null)
     {
         $this->is_open = $new;
+        $this->reason_for_close = $reason;
+        $this->closed_at = strlen($reason) > 1 ? now() : null;
         $this->save();
 
         return $this;
@@ -237,9 +247,9 @@ class Sale extends Model
         return $this->changeSalesState(1);
     }
 
-    public function closeSales()
+    public function closeSales($reason = null)
     {
-        return $this->changeSalesState(0);
+        return $this->changeSalesState(0, $reason);
     }
 
 }

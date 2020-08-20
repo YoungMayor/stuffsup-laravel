@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/sell', 'SaleController@saveSale')->name('sell');
 
     Route::post('/item_{item}/create_offer', 'OfferController@createOffer')->name('offer.create');
+
+    Route::post('/item_{item}/close/{token}', 'SaleController@closeSale')->name('sale.close');
 });
 
 

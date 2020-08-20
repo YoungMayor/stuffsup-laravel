@@ -3,6 +3,8 @@ import CreateOffer from './components/Item/CreateOffer.js';
 import ContentLoader from './components/ContentLoader.js';
 import OffersCard from './components/Item/OffersCard.js';
 import PagePreload from './components/PagePreload.js';
+import ElementTerminate from './components/ElementTerminate.js';
+import ClosedSign from './components/ClosedSign.js';
 
 Window.ITEM = new Vue({
     el: "#sales-details",
@@ -15,7 +17,9 @@ Window.ITEM = new Vue({
         'create-offer': CreateOffer,
         'content-loader': ContentLoader,
         'offers-card': OffersCard,
-        'page-preload': PagePreload
+        'page-preload': PagePreload,
+        'element-terminate': ElementTerminate,
+        'closed-sign': ClosedSign
     },
 
     data: {
@@ -37,16 +41,28 @@ Window.ITEM = new Vue({
             images: [],
             phone: '',
             locations: [],
+            price: '',
             is_public: false,
             description: '',
             new_offer: false,
-            get_offers: false
+            get_offers: false,
+            terminate: false,
+            terminated: false,
+
+            sale_closed: false,
         }
     },
 
     computed: {
         negotiation_type_label: function() {
             return this.page_details.is_public ? 'Public' : 'Private';
+        },
+
+        price_formatted: function() {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN'
+            }).format(this.page_details.price);
         }
     },
 

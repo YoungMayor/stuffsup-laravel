@@ -60,6 +60,10 @@ class User  extends Authenticatable implements MustVerifyEmail
     /**
      * Methods
      */
+    public function generateToken($action = 'default')
+    {
+        return md5(date('YMd') . $action . $this->id . env('APP_KEY'));
+    }
 
 
      /**

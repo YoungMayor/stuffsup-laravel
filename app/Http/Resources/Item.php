@@ -15,6 +15,12 @@ class Item extends JsonResource
      */
     public function toArray($request)
     {
+        if (!$this->is_open && !$this->i_am_seller){
+            return [
+                'sale_closed' => true
+            ];
+        }
+
         $locations = [];
         foreach ($this->locations as $location) {
             $locations[] = [
@@ -43,12 +49,19 @@ class Item extends JsonResource
                 #User Link not yet built
                 # @todo Build User Profile Page
             ],
+            'price' => $this->price,
             'is_public' => $this->is_public,
             $this->mergeWhen(Auth::check(), [
                 'new_offer' => $this->create_offer_link
             ]),
-            $this->mergeWhen(Auth::check() && ($this->is_public || $this->i_am_seller), [
+            $this->mergeWhen($this->is_public || $this->i_am_seller, [
                 'get_offers' => $this->item_offers_link
+            ]),
+            $this->mergeWhen($this->is_open && $this->i_am_seller, [
+                'terminate' => $this->close_sale_link
+            ]),
+            $this->mergeWhen(!$this->is_open && $this->i_am_seller, [
+                'terminated' => $this->reason_for_close
             ])
         ];
     }
