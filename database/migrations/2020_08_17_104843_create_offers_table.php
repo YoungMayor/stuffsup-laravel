@@ -15,6 +15,7 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
+            $table->string('token', 64)->unique();
 
             $table->bigInteger('item_id')->unsigned();
             $table->foreign('item_id')->references('id')->on('sales')->onDelete('cascade');

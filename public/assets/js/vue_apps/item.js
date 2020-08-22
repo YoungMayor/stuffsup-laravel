@@ -1,10 +1,11 @@
 import Vue from './vue_eb.js'
-import CreateOffer from './components/Item/CreateOffer.js';
+
 import ContentLoader from './components/ContentLoader.js';
 import OffersCard from './components/Item/OffersCard.js';
 import PagePreload from './components/PagePreload.js';
 import ElementTerminate from './components/ElementTerminate.js';
 import ClosedSign from './components/ClosedSign.js';
+import TextareaForm from './components/TextareaForm.js';
 
 Window.ITEM = new Vue({
     el: "#sales-details",
@@ -14,12 +15,12 @@ Window.ITEM = new Vue({
     ],
 
     components: {
-        'create-offer': CreateOffer,
         'content-loader': ContentLoader,
         'offers-card': OffersCard,
         'page-preload': PagePreload,
         'element-terminate': ElementTerminate,
-        'closed-sign': ClosedSign
+        'closed-sign': ClosedSign,
+        'textarea-form': TextareaForm
     },
 
     data: {

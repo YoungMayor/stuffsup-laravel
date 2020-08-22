@@ -28,7 +28,8 @@ class RouteServiceProvider extends ServiceProvider
         '404' => 'errors.404',
         'sell' => 'sell',
         'market' => 'market',
-        'item' => 'item'
+        'item' => 'item',
+        'offer' => 'offer'
     ];
 
     /**

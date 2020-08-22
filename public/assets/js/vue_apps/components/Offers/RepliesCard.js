@@ -10,7 +10,7 @@ export default {
     ],
 
     props: {
-        offer: {
+        reply: {
             type: Object,
             required: true
         }
@@ -28,6 +28,23 @@ export default {
 
     computed: {
         parsed_details: function() {
+            return {
+                from: {
+                    avatar: '#',
+                    link: '#',
+                    name: 'Mayor Young'
+                },
+                posted: {
+                    date: 'May 10th, 2020',
+                    time: '10:04am'
+                },
+                text: 'The Sample Text',
+                linkx: {
+                    target: '#',
+                    label: 'Open This piece of shit',
+                    icon: 'fa fa-external-link'
+                }
+            }
             return {
                 from: this.offer.from,
                 posted: this.offer.posted,
@@ -48,17 +65,6 @@ export default {
     template: `
 <media-card
     :details="parsed_details"
->
-    <span class="badge badge-pill badge-secondary float-right" slot="text">
-        {{ offer.responses }} response
-    </span>
-
-    <div class="text-center text-danger small" v-if="offer.closed" slot="foot">
-        <i class="fa fa-warning"></i>
-        <span>
-            Offer has been closed by the seller
-        </span>
-    </div>
-</media-card>
+></media-card>
     `
 };

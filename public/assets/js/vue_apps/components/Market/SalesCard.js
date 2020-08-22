@@ -1,8 +1,8 @@
-import CreateOffer from "../Item/CreateOffer.js";
+import TextareaForm from "../TextareaForm.js";
 
 export default {
     components: {
-        'create-offer': CreateOffer
+        'textarea-form': TextareaForm
     },
 
     mixins: [
@@ -190,11 +190,13 @@ export default {
                 </button>
             </div>
 
-            <create-offer
+            <textarea-form
                 v-if="item.quick"
                 v-show="show_quick_offer"
                 :target="item.quick"
-            ></create-offer>
+                heading="Submit offer for item"
+                placeholder="Enter offer here..."
+            ></textarea-form>
         </div>
     </div>
 </div>

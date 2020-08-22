@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Offer extends Model
 {
@@ -18,6 +19,11 @@ class Offer extends Model
     // public $timestamps = false;
 
     protected $guarded = [];
+
+    public function getRouteKeyName()
+    {
+        return 'token';
+    }
 
 
 
@@ -39,6 +45,15 @@ class Offer extends Model
     /**
      * Query Builders Scopes
      */
+    public function scopeOngoingOffer($query)
+    {
+        return $query->where('closed', 0);
+    }
+
+    public function scopeClosedOffer($query)
+    {
+        return $query->where('closed', 1);
+    }
 
 
 
@@ -47,6 +62,24 @@ class Offer extends Model
      * Accessors
      */
     public function getOfferLinkAttribute()
+    {
+        return route('offer', [
+            'item' => $this->item->token,
+            'offer' => $this->token
+        ]);
+    }
+
+    public function getCreateReplyLinkAttribute()
+    {
+        return "#";
+    }
+
+    public function getOfferRepliesLinkAttribute()
+    {
+        return "#";
+    }
+
+    public function getCloseOfferLinkAttribute()
     {
         return "#";
     }

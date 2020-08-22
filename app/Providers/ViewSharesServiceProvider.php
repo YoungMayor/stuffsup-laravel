@@ -44,7 +44,7 @@ class ViewSharesServiceProvider extends ServiceProvider
             [
                 'label' => 'Sell',
                 'icon' => 'fas fa-plus',
-                'route' => 'sell',
+                'route' => 'item.create',
                 'auth' => true
             ],
         ]);

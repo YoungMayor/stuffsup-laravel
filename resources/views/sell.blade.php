@@ -12,7 +12,7 @@ New Sale
 <div class="row">
     <div class="col">
         <form
-            action="{{ route('sell') }}"
+            action="{{ route('item.create') }}"
             method="POST"
             @submit.prevent="__submitAxiosForm"
             data-loader="submitting_form"

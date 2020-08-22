@@ -36,8 +36,6 @@ class Sale extends JsonResource
             'seller' => [
                 'name' => $this->seller->profile->full_name,
                 'link' => $this->seller->user_link
-                #User Link not yet built
-                # @todo Build User Profile Page
             ],
             'link' => $this->item_link,
             'offers' => $this->offers_count,

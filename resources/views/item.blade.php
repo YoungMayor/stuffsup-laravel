@@ -8,7 +8,7 @@
 @endpush
 
 @section('title')
-Sales Details
+Offer's Details
 @endsection
 
 
@@ -152,10 +152,12 @@ Sales Details
                         v-if="page_details.terminate"
                     ></element-terminate>
 
-                    <create-offer
+                    <textarea-form
                         v-if="page_details.new_offer"
                         :target="page_details.new_offer"
-                    ></create-offer>
+                        heading="Make offer for item"
+                        placeholder="Enter offer here..."
+                    ></textarea-form>
                 </template>
 
                 <!-- Start: Item offers -->

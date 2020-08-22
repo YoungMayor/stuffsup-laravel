@@ -1,8 +1,10 @@
 <?php
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,13 @@ Route::post('/item_{item}', 'SaleController@getItemDetails')->name('item');
 
 Route::post('/item_{item}/offers', 'OfferController@getOffers')->name('item.offers');
 
+Route::get('/item_{item}/offer_{offer}', 'OfferController@showOffer')->name('offer');
+Route::post('/item_{item}/offer_{offer}', 'OfferController@getOfferDetails')->name('offer');
+
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/sell', 'SaleController@showForm')->name('sell');
-    Route::post('/sell', 'SaleController@saveSale')->name('sell');
+    Route::get('/sell', 'SaleController@showForm')->name('item.create');
+    Route::post('/sell', 'SaleController@saveSale')->name('item.create');
 
     Route::post('/item_{item}/create_offer', 'OfferController@createOffer')->name('offer.create');
 

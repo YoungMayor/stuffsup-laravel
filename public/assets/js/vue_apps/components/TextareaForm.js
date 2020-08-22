@@ -1,4 +1,4 @@
-import __axios_form from './../../mixins/__axios_form.js';
+import __axios_form from "../mixins/__axios_form.js";
 
 export default {
     mixins: [
@@ -9,7 +9,15 @@ export default {
         target: {
             type: String,
             required: true
-        }
+        },
+        heading: {
+            type: String,
+            required: true
+        },
+        placeholder: {
+            type: String,
+            required: true
+        },
     },
 
     data() {
@@ -40,13 +48,13 @@ export default {
         <label
             class="small m-0 font-weight-bold"
             for="offer">
-            Your offer
+            {{ heading }}
         </label>
 
         <textarea
             class="form-control form-control-sm mb-2"
             name="offer"
-            placeholder="Enter your offer for this item.."
+            :placeholder="placeholder"
             rows="3"
             required=""></textarea>
 
