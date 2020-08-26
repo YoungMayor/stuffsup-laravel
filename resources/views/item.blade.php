@@ -8,7 +8,7 @@
 @endpush
 
 @section('title')
-Offer's Details
+Item's Details
 @endsection
 
 
@@ -46,27 +46,58 @@ Offer's Details
                     </p>
                     <!-- End: Date and Author -->
 
-                    <figure class="figure text-center w-100">
-                        <img
-                            class="rounded img-fluid figure-img"
-                            :src="opened_image.src">
-                        <figcaption class="figure-caption small">
-                            @{{ opened_image.caption }}
-                        </figcaption>
-                    </figure>
-
-                    <!-- Start: Item Image Previews -->
-                    <div class="row no-gutters flex-row flex-nowrap overflow-auto">
-                        <div
-                            class="col-3 col-sm-2 col-xl-1 p-1 shadow-sm bg-light"
-                            v-for="image in page_details.images">
+                    <div
+                        data-ride="carousel"
+                        data-interval="false"
+                        class="carousel slide"
+                        id="item-images-carousel">
+                        <div role="listbox" class="carousel-inner">
                             <div
-                                @click="loadImage(image)"
-                                :style="preview_style_object(image.links.preview)"
-                            ></div>
+                                v-for="image, index in page_details.images"
+                                class="carousel-item"
+                                :class="index == '0' ? 'active' :  ''">
+                                <img
+                                    class="d-block m-auto"
+                                    :src="image.links.full"
+                                    alt="Slide Image"
+                                    loading="lazy" />
+                            </div>
                         </div>
+
+                        <div>
+                            <a
+                                href="#item-images-carousel"
+                                role="button"
+                                data-slide="prev"
+                                class="carousel-control-prev">
+                                <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                                <span class="sr-only">
+                                    Previous
+                                </span>
+                            </a>
+
+                            <a
+                                href="#item-images-carousel"
+                                role="button"
+                                data-slide="next"
+                                class="carousel-control-next">
+                                <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                                <span class="sr-only">
+                                    Next
+                                </span>
+                            </a>
+                        </div>
+
+                        <ol class="carousel-indicators">
+                            <li
+                                v-for="image, index in page_details.images"
+                                data-target="#item-images-carousel"
+                                :data-slide-to="index"
+                                :class="index == '0' ? 'active' :  ''">
+                            </li>
+                        </ol>
                     </div>
-                    <!-- End: Item Image Previews -->
+
                 </div>
                 <!-- End: Intro -->
             </div>
@@ -74,62 +105,47 @@ Offer's Details
 
         <div class="row">
             <div class="col-md-10 col-lg-3 offset-md-1">
-                <div class="table-responsive table-borderless small m-0">
-                    <table class="table table-bordered table-sm">
-                        <tbody class="m-0">
-                            <tr>
-                                <td>
-                                    <i class="fa fa-phone"></i>
-                                </td>
-                                <td>
-                                    <a
-                                        class="btn btn-outline-secondary btn-sm"
-                                        role="button"
-                                        :href="'tel:'+page_details.phone"
-                                        target="_blank">
-                                        @{{ page_details.phone }}
-                                    </a>
-                                </td>
-                            </tr>
+                <show-card
+                    class="mb-2"
+                    label="Item Cost"
+                    :content="price_formatted"
+                    icon="fa fa-money"
+                ></show-card>
 
-                            <tr>
-                                <td>
-                                    <i class="fas fa-truck"></i>
-                                </td>
-                                <td>
-                                    <template
-                                        v-for="location in page_details.locations">
-                                        @{{ location.state }} (@{{ location.location }}) <br/>
-                                    </template>
-                                </td>
-                            </tr>
+                <show-card
+                    class="mb-2"
+                    label="Contact Phone"
+                    :content="page_details.phone"
+                    icon="fa fa-phone">
+                    <a
+                        class="btn btn-outline-secondary btn-block btn-sm"
+                        role="button"
+                        :href="'tel:'+page_details.phone"
+                        target="_blank">
+                        Call Agent
+                    </a>
+                </show-card>
 
-                            <tr>
-                                <td>
-                                    <i class="fas fa-mail-bulk"></i>
-                                </td>
-                                <td>
-                                    @{{ negotiation_type_label }}
-                                </td>
-                            </tr>
+                <show-card
+                    label="Delivery Location(s)"
+                    class="mb-2"
+                    icon="fas fa-truck">
+                    <template
+                        v-for="location in page_details.locations">
+                        @{{ location.state }} (@{{ location.location }}) <br/>
+                    </template>
+                </show-card>
 
-                            <tr>
-                                <td>
-                                    <i class="fas fa-cash-register"></i>
-                                </td>
-                                <td>
-                                    @{{ price_formatted }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <show-card
+                    label="Negotiation Type"
+                    class="mb-2"
+                    icon="fas fa-mail-bulk"
+                    :content="negotiation_type_label"
+                ></show-card>
 
-                <div class="overflow-hidden">
-                    <p data-aos="zoom-in-up" data-aos-duration="1000">
-                        @{{ page_details.description }}
-                    </p>
-                </div>
+                <show-card aos="zoom-in-up" duration="1000" class="mb-2">
+                    @{{ page_details.description }}
+                </show-card>
             </div>
 
             <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">

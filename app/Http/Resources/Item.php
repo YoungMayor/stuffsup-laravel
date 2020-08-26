@@ -54,13 +54,16 @@ class Item extends JsonResource
             $this->mergeWhen(Auth::check(), [
                 'new_offer' => $this->create_offer_link
             ]),
+            $this->mergeWhen($this->is_public, [
+                'get_offers' => $this->item_offers_link
+            ]),
             $this->mergeWhen($this->i_am_seller, [
-                $this->mergeWhen($this->is_public, [
-                    'get_offers' => $this->item_offers_link
-                ]),
+                'get_offers' => $this->item_offers_link,
+
                 $this->mergeWhen($this->is_open, [
                     'terminate' => $this->close_sale_link
                 ]),
+
                 $this->mergeWhen(!$this->is_open, [
                     'terminated' => $this->reason_for_close
                 ])

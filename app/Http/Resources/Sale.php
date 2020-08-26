@@ -37,6 +37,7 @@ class Sale extends JsonResource
                 'name' => $this->seller->profile->full_name,
                 'link' => $this->seller->user_link
             ],
+            'price' => $this->price,
             'link' => $this->item_link,
             'offers' => $this->offers_count,
             'public' => $this->is_public,

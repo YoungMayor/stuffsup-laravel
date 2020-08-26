@@ -8,7 +8,7 @@
 @endpush
 
 @section('title')
-Sales Details
+Offer's Details
 @endsection
 
 

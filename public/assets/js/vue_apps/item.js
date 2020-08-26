@@ -6,6 +6,7 @@ import PagePreload from './components/PagePreload.js';
 import ElementTerminate from './components/ElementTerminate.js';
 import ClosedSign from './components/ClosedSign.js';
 import TextareaForm from './components/TextareaForm.js';
+import ShowCard from './components/ShowCard.js';
 
 Window.ITEM = new Vue({
     el: "#sales-details",
@@ -20,7 +21,8 @@ Window.ITEM = new Vue({
         'page-preload': PagePreload,
         'element-terminate': ElementTerminate,
         'closed-sign': ClosedSign,
-        'textarea-form': TextareaForm
+        'textarea-form': TextareaForm,
+        'show-card': ShowCard
     },
 
     data: {

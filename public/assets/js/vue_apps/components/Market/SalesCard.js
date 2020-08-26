@@ -1,8 +1,10 @@
 import TextareaForm from "../TextareaForm.js";
+import ShowCard from "../ShowCard.js";
 
 export default {
     components: {
-        'textarea-form': TextareaForm
+        'textarea-form': TextareaForm,
+        'show-card': ShowCard
     },
 
     mixins: [
@@ -27,7 +29,12 @@ export default {
     },
 
     computed: {
-        //
+        price_formatted: function() {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN'
+            }).format(this.item.price);
+        }
     },
 
     mounted: function() {
@@ -67,9 +74,11 @@ export default {
         </div>
 
         <div class="card-body">
-            <p data-aos="zoom-in" data-aos-duration="1000">
+            <show-card
+                :content="price_formatted"
+                icon="fas fa-money">
                 {{ item.desc }}
-            </p>
+            </show-card>
 
             <div
                 data-aos="zoom-out" data-aos-duration="1000"
