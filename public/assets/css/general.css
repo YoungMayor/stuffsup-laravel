@@ -1,69 +1,81 @@
 #sidenav {
-  transition: all .3s ease-in;
-  z-index: 12;
+    transition: all .3s ease-in;
+    z-index: 12;
 }
 
 #sidenav #sidenav-menu {
-  position: sticky;
-  top: 0;
+    position: sticky;
+    top: 0;
 }
 
 #sidebarToggleTop {
-  /*top: 0;*/
-  /*position: fixed;*/
-  /*z-index: 999;*/
+    /*top: 0;*/
+    /*position: fixed;*/
+    /*z-index: 999;*/
 }
 
 .readmoni_icon {
-  width: 60%;
-  height: 60%;
+    width: 60%;
+    height: 60%;
 }
 
 #content-wrapper {
-  z-index: 10;
+    z-index: 10;
 }
 
 #accordionSidebar {
-  padding-top: 70px !important;
+    padding-top: 70px !important;
 }
 
 #topBar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 #pageBody {
-  margin-top: 70px;
-  padding-top: 10px;
-  min-height: calc(100vh - 70px);
-  position: relative;
+    margin-top: 70px;
+    padding-top: 10px;
+    min-height: calc(100vh - 70px);
+    position: relative;
 }
 
 .h-list {
-  display: flex;
-  overflow-x: auto;
-  /*padding: 0 5px;*/
+    display: flex;
+    overflow-x: auto;
+    /*padding: 0 5px;*/
 }
 
-.h-list > * {
-  flex-shrink: 0;
+.h-list>* {
+    flex-shrink: 0;
 }
 
 .m-320 {
-  max-width: 320px;
-  margin: auto;
+    max-width: 320px;
+    margin: auto;
 }
 
 .place-center {
-  margin: auto;
-  margin-top: 50%;
-  transform: translateY(-50%);
+    margin: auto;
+    margin-top: 50%;
+    transform: translateY(-50%);
 }
 
 #scroll-to-top {
-  z-index: 10;
+    z-index: 10;
 }
 
+.carousel-custom {}
+
+.carousel-custom .carousel-indicators {
+    position: relative;
+}
+
+.carousel-custom .carousel-indicators li {
+    height: 48px;
+    width: 48px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

@@ -46,57 +46,10 @@ Item's Details
                     </p>
                     <!-- End: Date and Author -->
 
-                    <div
-                        data-ride="carousel"
-                        data-interval="false"
-                        class="carousel slide"
-                        id="item-images-carousel">
-                        <div role="listbox" class="carousel-inner">
-                            <div
-                                v-for="image, index in page_details.images"
-                                class="carousel-item"
-                                :class="index == '0' ? 'active' :  ''">
-                                <img
-                                    class="d-block m-auto"
-                                    :src="image.links.full"
-                                    alt="Slide Image"
-                                    loading="lazy" />
-                            </div>
-                        </div>
-
-                        <div>
-                            <a
-                                href="#item-images-carousel"
-                                role="button"
-                                data-slide="prev"
-                                class="carousel-control-prev">
-                                <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-                                <span class="sr-only">
-                                    Previous
-                                </span>
-                            </a>
-
-                            <a
-                                href="#item-images-carousel"
-                                role="button"
-                                data-slide="next"
-                                class="carousel-control-next">
-                                <span aria-hidden="true" class="carousel-control-next-icon"></span>
-                                <span class="sr-only">
-                                    Next
-                                </span>
-                            </a>
-                        </div>
-
-                        <ol class="carousel-indicators">
-                            <li
-                                v-for="image, index in page_details.images"
-                                data-target="#item-images-carousel"
-                                :data-slide-to="index"
-                                :class="index == '0' ? 'active' :  ''">
-                            </li>
-                        </ol>
-                    </div>
+                    <custom-carousel
+                        :images="carousel_images"
+                        id="item-images-carousel"
+                    ></custom-carousel>
 
                 </div>
                 <!-- End: Intro -->

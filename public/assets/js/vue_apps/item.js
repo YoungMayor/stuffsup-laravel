@@ -7,6 +7,7 @@ import ElementTerminate from './components/ElementTerminate.js';
 import ClosedSign from './components/ClosedSign.js';
 import TextareaForm from './components/TextareaForm.js';
 import ShowCard from './components/ShowCard.js';
+import CustomCarousel from './components/CustomCarousel.js';
 
 Window.ITEM = new Vue({
     el: "#sales-details",
@@ -22,7 +23,8 @@ Window.ITEM = new Vue({
         'element-terminate': ElementTerminate,
         'closed-sign': ClosedSign,
         'textarea-form': TextareaForm,
-        'show-card': ShowCard
+        'show-card': ShowCard,
+        'custom-carousel': CustomCarousel
     },
 
     data: {
@@ -66,6 +68,16 @@ Window.ITEM = new Vue({
                 style: 'currency',
                 currency: 'NGN'
             }).format(this.page_details.price);
+        },
+
+        carousel_images: function() {
+            return this.page_details.images.map(function(elem) {
+                return {
+                    caption: elem.caption,
+                    preview: elem.links.preview,
+                    full: elem.links.full
+                };
+            })
         }
     },
 
