@@ -70,6 +70,12 @@ export default {
                 :src="image.full"
                 alt="Slide Image"
                 loading="lazy" />
+
+            <div class="carousel-caption p-1 overflow-auto">
+                <p class="text-nowrap mb-0">
+                    {{ image.caption }}
+                </p>
+            </div>
         </div>
     </div>
 

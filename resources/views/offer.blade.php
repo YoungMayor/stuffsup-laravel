@@ -18,70 +18,29 @@ Offer's Details
     <div class="article-dual-column">
         <div class="row">
             <div class="col-md-10 col-lg-3 offset-md-1">
-                <div class="media flex-lg-column flex-xl-row">
-                    <img
-                        class="rounded-circle img-fluid mr-1"
-                        :src="page_details.author.avatar"
-                        width="48px">
+                <media-card
+                    :details="parsed_media_details"
+                ></media-card>
 
-                    <div class="media-body pl-2 border-left">
-                        <h5 class="font-weight-bold mb-1">
-                            <a
-                                class="text-decoration-none"
-                                :href="page_details.author.link"
-                                target="_blank">
-                                @{{ page_details.author.name }}
-                            </a>
-                        </h5>
-
-                        <div class="table-responsive table-borderless">
-                            <table class="table table-bordered table-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <i class="fas fa-store-alt"></i>
-                                        </td>
-                                        <td>
-                                            <span>
-                                                @{{ page_details.item.title }}
-                                            </span>
-                                            <a
-                                                class="badge badge-pill badge-info ml-1"
-                                                :href="page_details.item.link"
-                                                target="_blank">Open Sale</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <i class="fa fa-calendar"></i>
-                                        </td>
-                                        <td>
-                                            @{{ page_details.posted.date }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="far fa-clock"></i>
-                                        </td>
-                                        <td>
-                                            @{{ page_details.posted.time }}
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <i class="far fa-comment-alt"></i>
-                                        </td>
-                                        <td>
-                                            @{{ page_details.offer }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <show-card
+                    label="Item Summary"
+                    :content="page_details.item.title"
+                    class="mb-2">
+                    <div>
+                        <span>
+                            @{{ page_details.item.desc }}
+                        </span>
                     </div>
-                </div>
+                    <div>
+                        <a
+                            class="btn btn-outline-secondary btn-block btn-sm"
+                            role="button"
+                            :href="page_details.item.link"
+                            target="_blank">
+                            Open Sale
+                        </a>
+                    </div>
+                </show-card>
             </div>
 
             <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">

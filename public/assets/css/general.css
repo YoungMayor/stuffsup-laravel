@@ -69,6 +69,17 @@
 
 .carousel-custom {}
 
+.carousel-custom .carousel-item {
+    padding-bottom: 45px;
+}
+
+.carousel-custom .carousel-caption {
+    position: absolute;
+    bottom: 0px;
+    left: 1vw;
+    right: 1vw;
+}
+
 .carousel-custom .carousel-indicators {
     position: relative;
 }

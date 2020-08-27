@@ -6,6 +6,8 @@ import ElementTerminate from './components/ElementTerminate.js';
 import ClosedSign from './components/ClosedSign.js';
 import TextareaForm from './components/TextareaForm.js';
 import RepliesCard from './components/Offers/RepliesCard.js';
+import MediaCard from './components/MediaCard.js';
+import ShowCard from './components/ShowCard.js';
 
 Window.OFFER = new Vue({
     el: "#sales-offer",
@@ -20,7 +22,9 @@ Window.OFFER = new Vue({
         'element-terminate': ElementTerminate,
         'closed-sign': ClosedSign,
         'textarea-form': TextareaForm,
-        'replies-card': RepliesCard
+        'replies-card': RepliesCard,
+        'media-card': MediaCard,
+        'show-card': ShowCard
     },
 
     data: {
@@ -31,10 +35,10 @@ Window.OFFER = new Vue({
                 name: '',
                 avatar: ''
             },
-            title: '',
             item: {
                 title: '',
-                link: ''
+                link: '',
+                desc: ''
             },
             posted: {
                 date: '',
@@ -50,7 +54,13 @@ Window.OFFER = new Vue({
     },
 
     computed: {
-        //
+        parsed_media_details: function() {
+            return {
+                from: this.page_details.author,
+                posted: this.page_details.posted,
+                text: this.page_details.offer
+            };
+        }
     },
 
     methods: {
