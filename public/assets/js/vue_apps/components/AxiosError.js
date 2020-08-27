@@ -28,9 +28,10 @@ export default {
 
     template: `
 <div
+    data-aos="fade-right"
     v-if="errorBagCount > 0"
     role="alert"
-    class="alert alert-danger px-0">
+    class="alert alert-danger px-0 overflow-hidden">
     <h5 class="alert-heading text-center font-weight-bold">
         <i class="fa fa-warning tada animated infinite fa-2x p-1"></i>
         <span class="d-inline-block swing animated">
@@ -41,6 +42,8 @@ export default {
     </h5>
 
     <div
+        data-aos="fade-left"
+        data-aos-duration="600"
         v-for="error_bag, error_label in errors"
         class="p-1 border-bottom">
         <h6 class="mb-0 pb-3">

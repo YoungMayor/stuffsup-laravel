@@ -4,6 +4,7 @@ import __axios_form from './mixins/__axios_form.js';
 import ImageCaption from './components/CreateSales/ImageCaption.js';
 import StateSelect from './components/StateSelect.js';
 import CategorySelect from './components/CategorySelect.js';
+import AxiosForm from './components/AxiosForm.js';
 
 Window.CREATESALE = new Vue({
     el: "#create-sales-form",
@@ -16,7 +17,8 @@ Window.CREATESALE = new Vue({
         'styled-input': StyledInput,
         'image-caption': ImageCaption,
         'state-select': StateSelect,
-        'category-select': CategorySelect
+        'category-select': CategorySelect,
+        'axios-form': AxiosForm
     },
 
     data: {

@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@include('mixins.aos')
-
 @push('styles')
 
 @endpush

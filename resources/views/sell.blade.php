@@ -11,12 +11,12 @@ New Sale
 @section('content')
 <div class="row">
     <div class="col">
-        <form
+        <axios-form
             action="{{ route('item.create') }}"
             method="POST"
-            @submit.prevent="__submitAxiosForm"
-            data-loader="submitting_form"
             data-dontreset="true"
+            loading="Posting your sale"
+            submit="Sell"
             id="create-sales-form">
 
             <div class="form-group">
@@ -189,17 +189,7 @@ New Sale
                 </div>
             </div>
             <!-- End: Attachments Row -->
-
-            <axios-error
-                :errors="validate_errors"
-            ></axios-error>
-
-            <div class="form-group text-right mt-5">
-                <button class="btn btn-primary" type="submit">
-                    Save
-                </button>
-            </div>
-        </form>
+        </axios-form>
     </div>
 </div>
 @endsection
