@@ -40,6 +40,11 @@ class Offer extends Model
         return $this->hasOne('App\User', 'id', 'from');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Reply', 'offer_id', 'id');
+    }
+
 
 
     /**
@@ -71,17 +76,27 @@ class Offer extends Model
 
     public function getCreateReplyLinkAttribute()
     {
-        return "#";
+        return route('reply.create', [
+            'item' => $this->item->token,
+            'offer' => $this->token
+        ]);
     }
 
     public function getOfferRepliesLinkAttribute()
     {
-        return "#";
+        return route('offer.replies', [
+            'item' => $this->item->token,
+            'offer' => $this->token
+        ]);
     }
 
     public function getCloseOfferLinkAttribute()
     {
-        return "#";
+        return route('offer.close', [
+            'item' => $this->item->token,
+            'offer' => $this->token,
+            'token' => $this->item->seller->generateToken('close offer')
+        ]);
     }
 
 
@@ -89,5 +104,23 @@ class Offer extends Model
     /**
      * Methods
      */
+    protected function changeOfferState($new, $reason = null)
+    {
+        $this->closed = $new;
+        $this->reason_for_close = $reason;
+        $this->save();
+
+        return $this;
+    }
+
+    public function openOffer()
+    {
+        return $this->changeOfferState(0);
+    }
+
+    public function closeOffer($reason = null)
+    {
+        return $this->changeOfferState(1, $reason);
+    }
 
 }

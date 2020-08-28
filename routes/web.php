@@ -32,14 +32,21 @@ Route::post('/item_{item}/offers', 'OfferController@getOffers')->name('item.offe
 Route::get('/item_{item}/offer_{offer}', 'OfferController@showOffer')->name('offer');
 Route::post('/item_{item}/offer_{offer}', 'OfferController@getOfferDetails')->name('offer');
 
+Route::post('/item_{item}/offer_{offer}/replies', 'ReplyController@getReplies')->name('offer.replies');
+
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('item.create');
     Route::post('/sell', 'SaleController@saveSale')->name('item.create');
 
     Route::post('/item_{item}/create_offer', 'OfferController@createOffer')->name('offer.create');
-
     Route::post('/item_{item}/close/{token}', 'SaleController@closeSale')->name('sale.close');
+
+    Route::post('/item_{item}/offer_{offer}/create_reply', 'ReplyController@createReply')->name('reply.create');
+    Route::post('/item_{item}/offer_{offer}/close/{token}', 'OfferController@closeOffer')->name('offer.close');
+
+    Route::post('/item_{item}/offer_{offer}/reply_{reply}/edit/{token}', 'ReplyController@editReply')->name('reply.edit');
+    Route::post('/item_{item}/offer_{offer}/reply_{reply}/delete/{token}', 'ReplyController@deleteReply')->name('reply.delete');
 });
 
 

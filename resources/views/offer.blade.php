@@ -53,7 +53,7 @@ Offer's Details
                         <span aria-hidden="true">×</span>
                     </button>
                     <h4 class="alert-heading">
-                        Sale has been closed
+                        Offer has been closed
                     </h4>
                     <span>
                         @{{ page_details.terminated }}
@@ -64,6 +64,7 @@ Offer's Details
                     <element-terminate
                         element="Offer"
                         :target="page_details.terminate"
+                        :success="on_close"
                         v-if="page_details.terminate"
                     ></element-terminate>
 
@@ -72,6 +73,7 @@ Offer's Details
                         :target="page_details.new_reply"
                         heading="Reply to offer"
                         placeholder="Enter reply here..."
+                        field="reply"
                     ></textarea-form>
                 </template>
 
@@ -90,12 +92,12 @@ Offer's Details
                             ></replies-card>
                         </div>
 
-                        {{-- <content-loader
-                            :list="offers"
+                        <content-loader
+                            :list="replies"
                             icon="fas fa-mail-bulk"
-                            label="More Offers"
-                            :target="page_details.get_offers"
-                        ></content-loader> --}}
+                            label="More Replies"
+                            :target="page_details.get_replies"
+                        ></content-loader>
                     </div>
                     <!-- End: Item offers -->
                 </template>

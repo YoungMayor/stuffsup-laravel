@@ -204,6 +204,7 @@ export default {
                 v-show="show_quick_offer"
                 :target="item.quick"
                 heading="Submit offer for item"
+                field="offer"
                 placeholder="Enter offer here..."
             ></textarea-form>
         </div>

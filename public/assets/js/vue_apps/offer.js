@@ -64,7 +64,9 @@ Window.OFFER = new Vue({
     },
 
     methods: {
-        //
+        on_close: function() {
+            window.location.reload();
+        }
     },
 
     mounted: function() {

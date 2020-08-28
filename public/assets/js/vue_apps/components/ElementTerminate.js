@@ -1,9 +1,13 @@
-import __axios_form from "../mixins/__axios_form.js";
+import AxiosForm from "./AxiosForm.js";
 
 export default {
     mixins: [
-        __axios_form
+        //
     ],
+
+    components: {
+        'axios-form': AxiosForm
+    },
 
     props: {
         element: {
@@ -17,6 +21,9 @@ export default {
         placeholder: {
             type: String,
             default: 'Enter your reason for closing this'
+        },
+        success: {
+            type: Function
         }
     },
 
@@ -45,11 +52,11 @@ export default {
     template: `
 <div>
     <div class="alert alert-danger" v-if="show_form">
-        <form
+        <axios-form
             :action="target"
             method="POST"
-            @submit.prevent="__submitAxiosForm"
-        >
+            :add_submit="false"
+            :on_success="success">
             <div class="form-group">
                 <label>
                     Reason For Close
@@ -102,7 +109,7 @@ export default {
                     Yes, Close {{ element }}
                 </button>
             </div>
-        </form>
+        </axios-form>
     </div>
 
     <div class="text-center alert-danger alert" v-else>

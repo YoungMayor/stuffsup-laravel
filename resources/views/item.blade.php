@@ -124,6 +124,7 @@ Item's Details
                         :target="page_details.new_offer"
                         heading="Make offer for item"
                         placeholder="Enter offer here..."
+                        field="offer"
                     ></textarea-form>
                 </template>
 

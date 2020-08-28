@@ -26,6 +26,13 @@ export default {
             type: String,
             default: 'Save'
         },
+        add_submit: {
+            type: Boolean,
+            default: true
+        },
+        on_success: {
+            type: Function
+        }
     },
 
     data() {
@@ -52,10 +59,17 @@ export default {
                 var data = response.data;
 
                 bar.alertSuccess(data);
+                if (typeof(bar.on_success) == 'function') {
+                    bar.on_success(data);
+                }
                 if (!bar.form.dataset.dontreset) {
                     bar.form.reset();
                 }
             }).catch(function(error) {
+                if (!error.response) {
+                    // console.log(error)
+                    return;
+                }
                 let error_status = error.response.status;
                 let error_data = error.response.data;
 
@@ -198,7 +212,7 @@ export default {
         :errors="validate_errors"
     ></axios-error>
 
-    <div class="form-group text-right mt-5">
+    <div class="form-group text-right mt-3" v-if="add_submit">
         <button class="btn btn-primary" type="submit">
             {{ submit }}
         </button>

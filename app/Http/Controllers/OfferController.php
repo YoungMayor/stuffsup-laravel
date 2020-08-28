@@ -7,6 +7,7 @@ use App\Http\Resources\OfferPage;
 use App\Offer;
 use App\Providers\RouteServiceProvider;
 use App\Sale;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +44,22 @@ class OfferController extends Controller
     {
         $item->offers()->findOrFail($offer->id);
         return new OfferPage($offer);
+    }
+
+    public function closeOffer(Request $request, Sale $item, Offer $offer, $token)
+    {
+        $item->offers()->findOrFail($offer->id);
+        $user = User::find(Auth::id());
+        if ($user->generateToken('close offer') == $token){
+            $offer->closeOffer($request->reason);
+
+            return response()->json([
+                'msg' => "Offer has been closed"
+            ], 201);
+        }else{
+            return response()->json([
+                'msg' => "You do not have authorization to perform this action"
+            ], 403);
+        }
     }
 }

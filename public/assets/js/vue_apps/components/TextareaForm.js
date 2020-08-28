@@ -1,9 +1,13 @@
-import __axios_form from "../mixins/__axios_form.js";
+import AxiosForm from "./AxiosForm.js";
 
 export default {
     mixins: [
-        __axios_form
+        //
     ],
+
+    components: {
+        'axios-form': AxiosForm
+    },
 
     props: {
         target: {
@@ -18,6 +22,10 @@ export default {
             type: String,
             required: true
         },
+        field: {
+            type: String,
+            required: true
+        }
     },
 
     data() {
@@ -39,10 +47,10 @@ export default {
     },
 
     template: `
-<form
+<axios-form
     :action="target"
     method="POST"
-    @submit.prevent="__submitAxiosForm"
+    :add_submit="false"
     class="m-0">
     <div class="form-group px-1 py-2 m-0">
         <label
@@ -53,7 +61,7 @@ export default {
 
         <textarea
             class="form-control form-control-sm mb-2"
-            name="offer"
+            :name="field"
             :placeholder="placeholder"
             rows="3"
             required=""></textarea>
@@ -64,6 +72,6 @@ export default {
             Send
         </button>
     </div>
-</form>
+</axios-form>
     `
 };
