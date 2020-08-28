@@ -22,11 +22,10 @@ Offer's Details
 
                 <show-card
                     label="Item Summary"
-                    :content="page_details.item.title"
                     class="mb-2">
                     <div>
                         <span>
-                            @{{ page_details.item.desc }}
+                            @{{ page_details.item.title }}
                         </span>
                     </div>
                     <div>

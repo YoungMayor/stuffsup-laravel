@@ -18,6 +18,26 @@ class Offer extends Model
 
     // public $timestamps = false;
 
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'user',
+        'user.profile',
+        'item',
+    ];
+
+    /**
+     * The relationship counts that should be eager loaded on every query.
+     *
+     * @var array
+     */
+    protected $withCount = [
+        'replies',
+    ];
+
     protected $guarded = [];
 
     public function getRouteKeyName()

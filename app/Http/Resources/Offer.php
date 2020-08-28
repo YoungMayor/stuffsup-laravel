@@ -26,7 +26,7 @@ class Offer extends JsonResource
             ],
             'offer' => $this->offer,
             'link' => $this->offer_link,
-            'responses' => '12',
+            'responses' => $this->replies_count,
             'closed' => $this->closed,
             $this->mergeWhen($this->i_am_seller && $this->closed, function(){
                 return [
