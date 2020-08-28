@@ -1,4 +1,4 @@
-import Vue from './vue_eb.js'
+import Vue from './vue_eb.full.js'
 
 import ContentLoader from './components/ContentLoader.js';
 import PagePreload from './components/PagePreload.js';
@@ -66,6 +66,10 @@ Window.OFFER = new Vue({
     methods: {
         on_close: function() {
             window.location.reload();
+        },
+
+        deleteReply: function(key) {
+            return this.$delete(this.replies, key);
         }
     },
 

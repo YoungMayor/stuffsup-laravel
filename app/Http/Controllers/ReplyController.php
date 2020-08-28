@@ -34,9 +34,12 @@ class ReplyController extends Controller
 
     public function editReply(Sale $item, Offer $offer, Reply $reply, $token, Request $request)
     {
+        $item->offers()->findOrFail($offer->id)->replies()->findOrFail($reply->id);
         $user = User::find(Auth::id());
         if ($user->generateToken('edit reply') == $token){
-            // edit the reply
+            $reply->before_edit = $reply->reply;
+            $reply->reply = $request->edit;
+            $reply->save();
 
             return response()->json([
                 'msg' => "Your reply has been edited"
@@ -50,9 +53,10 @@ class ReplyController extends Controller
 
     public function deleteReply(Sale $item, Offer $offer, Reply $reply, $token, Request $request)
     {
+        $item->offers()->findOrFail($offer->id)->replies()->findOrFail($reply->id);
         $user = User::find(Auth::id());
         if ($user->generateToken('delete reply') == $token){
-            // delete the reply
+            $reply->delete();
 
             return response()->json([
                 'msg' => "Response deleted"

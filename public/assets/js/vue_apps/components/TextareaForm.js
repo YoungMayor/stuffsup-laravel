@@ -5,6 +5,11 @@ export default {
         //
     ],
 
+    model: {
+        prop: 'value',
+        event: 'input'
+    },
+
     components: {
         'axios-form': AxiosForm
     },
@@ -25,7 +30,15 @@ export default {
         field: {
             type: String,
             required: true
-        }
+        },
+        submit: {
+            type: String,
+            default: 'Send'
+        },
+        value: {
+            type: String,
+            default: ''
+        },
     },
 
     data() {
@@ -64,12 +77,14 @@ export default {
             :name="field"
             :placeholder="placeholder"
             rows="3"
+            :value="value"
+            @input="$emit('input', $event.target.value)"
             required=""></textarea>
 
         <button
             class="btn btn-success btn-sm ml-auto d-block"
             type="submit">
-            Send
+            {{ submit }}
         </button>
     </div>
 </axios-form>

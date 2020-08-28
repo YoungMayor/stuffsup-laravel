@@ -76,7 +76,7 @@ export default {
             {{ details.posted.date }} - {{ details.posted.time }}
         </small>
 
-        <p>
+        <p class="mb-1">
             {{ details.text }}
 
             <slot name="text"></slot>

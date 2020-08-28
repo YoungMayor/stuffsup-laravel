@@ -89,6 +89,7 @@ Offer's Details
                                 v-for="reply, key in replies"
                                 :key="key"
                                 :reply="reply"
+                                @delete_reply="deleteReply(key)"
                             ></replies-card>
                         </div>
 
