@@ -26,6 +26,11 @@ class ViewSharesServiceProvider extends ServiceProvider
     {
         View::share('___side_nav_menus', [
             [
+                'label' => 'My Profile',
+                'icon' => 'fas fa-user',
+                'route' => "profile.self"
+            ],
+            [
                 'label' => 'Home',
                 'icon' => 'fas fa-home',
                 'route' => "home"

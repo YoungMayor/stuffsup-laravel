@@ -29,7 +29,8 @@ class RouteServiceProvider extends ServiceProvider
         'sell' => 'sell',
         'market' => 'market',
         'item' => 'item',
-        'offer' => 'offer'
+        'offer' => 'offer',
+        'profile' => 'profile'
     ];
 
     /**

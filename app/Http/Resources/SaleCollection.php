@@ -14,10 +14,7 @@ class SaleCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => $this->collection,
-            'links' => []
-        ];
+        return parent::toArray($request);
     }
 
 }

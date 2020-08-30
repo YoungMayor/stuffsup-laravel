@@ -34,6 +34,8 @@ Route::post('/item_{item}/offer_{offer}', 'OfferController@getOfferDetails')->na
 
 Route::post('/item_{item}/offer_{offer}/replies', 'ReplyController@getReplies')->name('offer.replies');
 
+Route::get('/user_{user}', 'ProfileController@showProfile')->name('profile');
+Route::post('/user_{user}/peek/market', 'ProfileController@peekMarket')->name('profile.peek.market');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('item.create');
@@ -47,6 +49,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('/item_{item}/offer_{offer}/reply_{reply}/edit/{token}', 'ReplyController@editReply')->name('reply.edit');
     Route::post('/item_{item}/offer_{offer}/reply_{reply}/delete/{token}', 'ReplyController@deleteReply')->name('reply.delete');
+    Route::post('/item_{item}/offer_{offer}/reply_{reply}/edit/{token}', 'ReplyController@editReply')->name('reply.edit');
+    Route::post('/item_{item}/offer_{offer}/reply_{reply}/delete/{token}', 'ReplyController@deleteReply')->name('reply.delete');
+
+
+    Route::get('/profile', 'ProfileController@selfProfile')->name('profile.self');
+    Route::get('/profile/edit', 'ProfileController@showEditor')->name('profile.edit');
 });
 
 

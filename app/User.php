@@ -37,6 +37,11 @@ class User  extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
 
     /**
      * Relationships
@@ -71,6 +76,20 @@ class User  extends Authenticatable implements MustVerifyEmail
       */
     public function getUserLinkAttribute()
     {
+        return route('profile', [
+            'user' => $this->name
+        ]);
+    }
+
+    public function getUserSalesLinkAttribute()
+    {
         return "#";
+    }
+
+    public function getUserSalesPeekLinkAttribute()
+    {
+        return route('profile.peek.market', [
+            'user' => $this->name
+        ]);
     }
 }
