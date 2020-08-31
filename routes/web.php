@@ -34,8 +34,8 @@ Route::post('/item_{item}/offer_{offer}', 'OfferController@getOfferDetails')->na
 
 Route::post('/item_{item}/offer_{offer}/replies', 'ReplyController@getReplies')->name('offer.replies');
 
-Route::get('/user_{user}', 'ProfileController@showProfile')->name('profile');
-Route::post('/user_{user}/peek/market', 'ProfileController@peekMarket')->name('profile.peek.market');
+Route::get('/agent/{user}', 'ProfileController@showProfile')->name('profile');
+Route::post('/agent/{user}/peek/market', 'ProfileController@peekMarket')->name('profile.peek.market');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('item.create');
@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/profile', 'ProfileController@selfProfile')->name('profile.self');
     Route::get('/profile/edit', 'ProfileController@showEditor')->name('profile.edit');
+
+    Route::post('/agent/{user}/create/review', 'ReviewController@createReview')->name('user.create.review');
 });
 
 

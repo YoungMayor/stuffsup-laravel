@@ -61,6 +61,21 @@ class User  extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Offer', 'from', 'id');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Reply', 'from', 'id');
+    }
+
+    public function reviews_made()
+    {
+        return $this->hasMany('App\Review', 'reviewer_id', 'id');
+    }
+
+    public function reviews_received()
+    {
+        return $this->hasMany('App\Review', 'user_id', 'id');
+    }
+
 
     /**
      * Methods
@@ -68,6 +83,32 @@ class User  extends Authenticatable implements MustVerifyEmail
     public function generateToken($action = 'default')
     {
         return md5(date('YMd') . $action . $this->id . env('APP_KEY'));
+    }
+
+    public function getReviewOnUser(User $user)
+    {
+        $review = $this
+            ->reviews_made()
+            ->where('user_id', $user->id)
+            ->first();
+
+        return [
+            'review' => $review ? $review->review : '',
+            'rating' => $review ? $review->rating : ''
+        ];
+    }
+
+    public function getReviewFromUser(User $user)
+    {
+        $review = $this
+            ->reviews_received()
+            ->where('reviewer_id', $user->id)
+            ->first();
+
+        return [
+            'review' => $review ? $review->review : '',
+            'rating' => $review ? $review->rating : ''
+        ];
     }
 
 
@@ -92,4 +133,12 @@ class User  extends Authenticatable implements MustVerifyEmail
             'user' => $this->name
         ]);
     }
+
+    public function getCreateReviewLinkAttribute()
+    {
+        return route('user.create.review', [
+            'user' => $this->name
+        ]);
+    }
+
 }

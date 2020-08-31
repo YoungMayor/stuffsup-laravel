@@ -243,41 +243,85 @@ Agent Profile
         </div>
     </div>
 
-    <div class="card shadow mb-5">
-        <div class="card-header py-3">
-            <p class="text-primary m-0 font-weight-bold">Inform The Community</p>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <form>
-                        <h4 class="font-weight-bold">Review User</h4>
-                        <div class="form-group"><label for="review"><strong>Review</strong><br /></label><textarea
-                                class="form-control" rows="4" name="review"></textarea></div>
-                        <div class="form-group"><label class="d-block"
-                                for="rating"><strong>Rating</strong><br /></label><input type="number"
-                                class="form-control d-inline w-auto rounded-pill" name="rating" value="3.0" min="1.0"
-                                max="5.0" step="0.5" required /><span>stars</span></div>
-                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit
-                                Review</button></div>
-                    </form>
+    @auth
+        @if ($user->id !== Auth::id())
+            <div class="card shadow mb-5">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">
+                        Inform The Community
+                    </p>
                 </div>
-                <div class="col-md-6">
-                    <form class="text-white bg-danger border rounded p-3">
-                        <h4 class="font-weight-bold">Report User</h4>
-                        <div class="form-group"><label for="title"><strong>Title</strong><br /></label><input type="text"
-                                class="form-control" name="title" placeholder="Short and Descriptive Title" /></div>
-                        <div class="form-group"><label for="description"><strong>Description</strong><br /></label><textarea
-                                class="form-control" rows="4" name="description"
-                                placeholder="Describe the wrong doing  of this user"></textarea></div>
-                        <div class="form-group"><button class="btn btn-danger btn-sm border rounded border-white shadow-sm"
-                                type="submit">Send
-                                Report</button></div>
-                    </form>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <axios-form
+                                action="{{ $user->create_review_link }}"
+                                method="POST"
+                                data-dontreset="true"
+                                loading="Submitting Review"
+                                submit="Submit Review">
+                                <h4 class="font-weight-bold">
+                                    Review User
+                                </h4>
+
+                                <div class="form-group">
+                                    <label for="review">
+                                        <strong>
+                                            Review
+                                        </strong>
+                                    </label>
+
+                                    <textarea
+                                        class="form-control"
+                                        rows="4"
+                                        name="review">{{ Auth::user()->getReviewOnUser($user)['review'] }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        class="d-block"
+                                        for="rating">
+                                        <strong>
+                                            Rating
+                                        </strong>
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        class="form-control d-inline w-auto rounded-pill mr-1"
+                                        name="rating"
+                                        value="{{ Auth::user()->getReviewOnUser($user)['rating'] }}"
+                                        min="1.0"
+                                        max="5.0"
+                                        step="0.5"
+                                        required />
+
+                                    <span>
+                                        star(s)
+                                    </span>
+                                </div>
+                            </axios-form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <form class="text-white bg-danger border rounded p-3">
+                                <h4 class="font-weight-bold">Report User</h4>
+                                <div class="form-group"><label for="title"><strong>Title</strong><br /></label><input type="text"
+                                        class="form-control" name="title" placeholder="Short and Descriptive Title" /></div>
+                                <div class="form-group"><label for="description"><strong>Description</strong><br /></label><textarea
+                                        class="form-control" rows="4" name="description"
+                                        placeholder="Describe the wrong doing  of this user"></textarea></div>
+                                <div class="form-group"><button class="btn btn-danger btn-sm border rounded border-white shadow-sm"
+                                        type="submit">Send
+                                        Report</button></div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @endif
+    @endauth
+
 </div>
 @endsection
 
