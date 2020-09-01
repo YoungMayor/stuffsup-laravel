@@ -81,6 +81,8 @@ export default {
             @input="$emit('input', $event.target.value)"
             required=""></textarea>
 
+        <slot></slot>
+
         <button
             class="btn btn-success btn-sm ml-auto d-block"
             type="submit">

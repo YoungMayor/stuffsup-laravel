@@ -36,7 +36,7 @@ class Review extends Model
 
     public function reviewer()
     {
-        return $this->hasOne('App\User', 'id', 'review_id');
+        return $this->hasOne('App\User', 'id', 'reviewer_id');
     }
 
 
@@ -52,6 +52,33 @@ class Review extends Model
     /**
      * Accessors
      */
+
+    public function getEditReviewLinkAttribute()
+    {
+        return "#";
+        return route('reply.edit', [
+            'item' => $this->offer->item->token,
+            'offer' => $this->offer->token,
+            'reply' => $this->token,
+            'token' => $this->user->generateToken('edit reply')
+        ]);
+    }
+
+    public function getDeleteReviewLinkAttribute()
+    {
+        return "#";
+        return route('reply.delete', [
+            'item' => $this->offer->item->token,
+            'offer' => $this->offer->token,
+            'reply' => $this->token,
+            'token' => $this->user->generateToken('delete reply')
+        ]);
+    }
+
+    public function getIAmAuthorAttribute()
+    {
+        return Auth::check() && $this->reviewer_id == Auth::id();
+    }
 
 
 

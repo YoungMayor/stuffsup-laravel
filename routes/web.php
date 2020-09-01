@@ -36,6 +36,7 @@ Route::post('/item_{item}/offer_{offer}/replies', 'ReplyController@getReplies')-
 
 Route::get('/agent/{user}', 'ProfileController@showProfile')->name('profile');
 Route::post('/agent/{user}/peek/market', 'ProfileController@peekMarket')->name('profile.peek.market');
+Route::post('/agent/{user}/peek/reviews', 'ProfileController@peekReviews')->name('profile.peek.reviews');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/sell', 'SaleController@showForm')->name('item.create');

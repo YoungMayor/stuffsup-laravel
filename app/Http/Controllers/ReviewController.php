@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReview;
+use App\Http\Resources\ReviewCollection;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,5 +38,10 @@ class ReviewController extends Controller
                 ? 'Your review on this user has been updated'
                 : 'Review has been submitted',
         ], 201);
+    }
+
+    public function getReviews(User $user, Request $request)
+    {
+        //
     }
 }

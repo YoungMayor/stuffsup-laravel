@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Providers\StateMapServiceProvider;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,7 +49,15 @@ class User  extends Authenticatable implements MustVerifyEmail
      */
     public function profile()
     {
-        return $this->hasOne('App\Profile');
+        return $this->hasOne('App\Profile')->withDefault([
+            'avatar_token' => null,
+            'first_name' => 'Unknown',
+            'last_name' => 'User',
+            'state' => StateMapServiceProvider::$___valid_map_sample['state'],
+            'city' => 'unset',
+            'address' => 'unknown',
+            'about' => '...'
+        ]);
     }
 
     public function sales()
@@ -134,11 +143,31 @@ class User  extends Authenticatable implements MustVerifyEmail
         ]);
     }
 
+    public function getReceivedReviewsLinkAttribute()
+    {
+        return "#";
+    }
+
+    public function getReceivedReviewsPeekLinkAttribute()
+    {
+        return route('profile.peek.reviews', [
+            'user' => $this->name
+        ]);
+    }
+
     public function getCreateReviewLinkAttribute()
     {
         return route('user.create.review', [
             'user' => $this->name
         ]);
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return [
+            'made' => $this->reviews_made()->avg('rating'),
+            'received' => $this->reviews_received()->avg('rating'),
+        ];
     }
 
 }

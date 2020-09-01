@@ -153,55 +153,48 @@ Agent Profile
                         </div>
 
                         <div class="card-body">
-                            {{-- Statr of Review Card --}}
-                            <div class="media bg-white border rounded border-white shadow-sm p-1 mb-2">
-                                <img
-                                    class="rounded-circle img-fluid mr-3"
-                                    src="profile.jpg"
-                                    width="48px"
-                                    loading="lazy" />
-                                <div class="media-body">
-                                    <h6 class="font-weight-bold">
-                                        Meyoron Aghogho
-                                        <a
-                                            class="btn btn-outline-success btn-sm float-right"
-                                            role="button"
-                                            href="profile.html"
-                                            target="_blank">
-                                            View Profile
-                                        </a>
-                                    </h6>
+                            <review-card
+                                v-for="review, key in reviews"
+                                :key="key"
+                                :review="review"
+                            ></review-card>
 
-                                    <small>
-                                        Lorem ipsum
-                                        dolor sit amet, consectetur adipiscing elit. Duis maximus nisl ac diam feugiat,
-                                        non vestibulum libero posuere. Vivamus pharetra leo non nulla egestas, nec
-                                        malesuada orci finibus.<br />
-                                    </small>
-                                </div>
-                            </div>
-                            {{-- End of Review Card --}}
+                            <content-loader
+                                :list="reviews"
+                                icon="fas fa-store-alt"
+                                label="More Reviews"
+                                target="{{ $user->received_reviews_peek_link }}"
+                                class="d-none"
+                            ></content-loader>
 
-                            <button
+                            <a
+                                href="#"
                                 class="btn btn-primary d-block m-auto"
                                 type="button">
                                 More Reviews
-                            </button>
+                            </a>
 
                             <div class="text-white bg-secondary rounded-pill overflow-hidden m-2">
-                                <h5 class="text-center">
-                                    Rating
-                                </h5>
+                                <div class="p-1 small text-center">
+                                    <span class="text-center">
+                                        Average Rating
+                                        <span class="fa">
+                                            {{ $user->average_rating['received'] }}
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        from {{ $user->reviews_received()->count() }} users
+                                    </span>
+                                </div>
 
                                 <div class="progress">
                                     <div
                                         class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                        aria-valuenow="80"
+                                        aria-valuenow="{{ $user->average_rating['received'] * 20 }}"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        style="width: 80%;">
+                                        style="width: {{ $user->average_rating['received'] * 20 }}%;">
                                         <span class="sr-only">
-                                            80%
+                                            {{ $user->average_rating['received'] * 20 }}%
                                         </span>
                                     </div>
                                 </div>

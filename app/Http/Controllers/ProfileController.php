@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReviewCollection;
 use App\Http\Resources\SaleCollection;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -32,6 +33,11 @@ class ProfileController extends Controller
     public function peekMarket(Request $request, User $user)
     {
         return new SaleCollection($user->sales()->ongoingSales()->inRandomOrder()->limit(3)->get());
+    }
+
+    public function peekReviews(User $user, Request $request)
+    {
+        return new ReviewCollection($user->reviews_received()->inRandomOrder()->limit(3)->get());
     }
 
     public function showEditor(Request $request)

@@ -3,6 +3,7 @@ import LinkCopy from './components/LinkCopy.js';
 import SalesCard from './components/Market/SalesCard.js';
 import ContentLoader from './components/ContentLoader.js';
 import AxiosForm from './components/AxiosForm.js';
+import ReviewCard from './components/Profile/ReviewCard.js';
 
 Window.OFFER = new Vue({
     el: "#agent-profile",
@@ -15,11 +16,13 @@ Window.OFFER = new Vue({
         'link-copy': LinkCopy,
         'sales-card': SalesCard,
         'content-loader': ContentLoader,
-        'axios-form': AxiosForm
+        'axios-form': AxiosForm,
+        'review-card': ReviewCard
     },
 
     data: {
-        sales: {}
+        sales: {},
+        reviews: {}
     },
 
     computed: {
