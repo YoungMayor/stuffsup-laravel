@@ -131,13 +131,21 @@
 
 <li class="nav-item dropdown no-arrow" role="presentation">
     <div class="nav-item dropdown no-arrow">
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-            aria-expanded="false" type="button">
-            <span class="text-white d-none d-lg-inline mr-2 small">Meyoron Aghogho</span>
-            <img class="border rounded-circle img-profile"
-                src="@imgURL(profile.jpg)"
+        <button
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="false"
+            type="button">
+            <span class="text-white d-none d-lg-inline mr-2 small">
+                {{ Auth::user()->profile->full_name }}
+            </span>
+
+            <img
+                class="border rounded-circle img-profile"
+                src="{{ Auth::user()->profile->avatar_url }}"
                 style="width: 48px;height: 48px;">
         </button>
+
         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
             <a class="dropdown-item" role="presentation" href="profile-self.html">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
