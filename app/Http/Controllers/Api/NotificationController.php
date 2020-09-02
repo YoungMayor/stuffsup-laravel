@@ -32,6 +32,6 @@ class NotificationController extends Controller
             ], 401);
         }
 
-        return new NotificationCollection($user->notifications()->paginate(3));
+        return new NotificationCollection($user->notifications()->latest()->paginate(3));
     }
 }
