@@ -297,17 +297,52 @@ Agent Profile
                         </div>
 
                         <div class="col-md-6">
-                            <form class="text-white bg-danger border rounded p-3">
-                                <h4 class="font-weight-bold">Report User</h4>
-                                <div class="form-group"><label for="title"><strong>Title</strong><br /></label><input type="text"
-                                        class="form-control" name="title" placeholder="Short and Descriptive Title" /></div>
-                                <div class="form-group"><label for="description"><strong>Description</strong><br /></label><textarea
-                                        class="form-control" rows="4" name="description"
-                                        placeholder="Describe the wrong doing  of this user"></textarea></div>
-                                <div class="form-group"><button class="btn btn-danger btn-sm border rounded border-white shadow-sm"
-                                        type="submit">Send
-                                        Report</button></div>
-                            </form>
+                            <axios-form
+                                action="{{ $user->create_report_link }}"
+                                method="POST"
+                                loading="Sending Report to Administrators"
+                                :add_submit="false"
+                                class="text-white bg-danger border rounded p-3">
+                                <h4 class="font-weight-bold">
+                                    Report User
+                                </h4>
+
+                                <div class="form-group">
+                                    <label for="title">
+                                        <strong>
+                                            Title
+                                        </strong>
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="title"
+                                        placeholder="Short and Descriptive Title" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">
+                                        <strong>
+                                            Description
+                                        </strong>
+                                    </label>
+
+                                    <textarea
+                                        class="form-control"
+                                        rows="4"
+                                        name="description"
+                                        placeholder="Describe the wrong doing  of this user"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button
+                                        class="btn btn-danger btn-sm border rounded border-white shadow-sm"
+                                        type="submit">
+                                        Send Report
+                                    </button>
+                                </div>
+                            </axios-form>
                         </div>
                     </div>
                 </div>

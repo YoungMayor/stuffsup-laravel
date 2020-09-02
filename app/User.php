@@ -85,6 +85,16 @@ class User  extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Review', 'user_id', 'id');
     }
 
+    public function reports_made()
+    {
+        return $this->hasMany('App\Report', 'reporter_id', 'id');
+    }
+
+    public function reports_received()
+    {
+        return $this->hasMany('App\Report', 'user_id', 'id');
+    }
+
 
     /**
      * Methods
@@ -151,6 +161,13 @@ class User  extends Authenticatable implements MustVerifyEmail
     public function getReceivedReviewsPeekLinkAttribute()
     {
         return route('profile.peek.reviews', [
+            'user' => $this->name
+        ]);
+    }
+
+    public function getCreateReportLinkAttribute()
+    {
+        return route('user.create.report', [
             'user' => $this->name
         ]);
     }
