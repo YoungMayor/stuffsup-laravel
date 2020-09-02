@@ -143,7 +143,9 @@ class User  extends Authenticatable implements MustVerifyEmail
 
     public function getUserSalesLinkAttribute()
     {
-        return "#";
+        return route('user.market', [
+            'user' => $this->name
+        ]);
     }
 
     public function getUserSalesPeekLinkAttribute()

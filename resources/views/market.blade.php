@@ -10,7 +10,7 @@ Market Place
 
 @section('content')
 <h3 class="text-dark mb-1">
-    Available Sales
+    {{ $title }}
 </h3>
 
 <div class="row" id="market-sales">

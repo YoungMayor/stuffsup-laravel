@@ -57,7 +57,9 @@ class SaleController extends Controller
 
     public function showMarket(Request $request, $type = "all")
     {
-        return view(RouteServiceProvider::VIEWS['market'], []);
+        return view(RouteServiceProvider::VIEWS['market'], [
+            'title' => "Available Sales"
+        ]);
     }
 
     public function getSales(Request $request, $type = "all")
@@ -78,6 +80,22 @@ class SaleController extends Controller
         }
 
         return new SaleCollection($item_obj->latest()->paginate());
+    }
+
+    public function showUserMarket(Request $request, User $user)
+    {
+        return view(RouteServiceProvider::VIEWS['market'], [
+            'title' => "Sales by {$user->profile->full_name}"
+        ]);
+    }
+
+    public function getUserSales(Request $request, User $user)
+    {
+        return new SaleCollection($user
+            ->sales()
+            ->ongoingSales()
+            ->latest()
+            ->paginate());
     }
 
 
