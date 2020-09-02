@@ -58,7 +58,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/profile/edit', 'ProfileController@showEditor')->name('profile.edit');
 
     Route::post('/agent/{user}/create/review', 'ReviewController@createReview')->name('user.create.review');
+
+
+    Route::post('/api/agent/{user}/notifications/get_count', 'Api\NotificationController@getNotificationCount')->name('api.get_notification_count');
+    Route::post('/api/agent/{user}/notifications/get_notification', 'Api\NotificationController@getNotifications')->name('api.get_notifications');
 });
+
 
 
 Route::fallback(function(){

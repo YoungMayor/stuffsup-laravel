@@ -175,7 +175,7 @@ export default {
             }
 
             if (data.title) {
-                title = data.msg;
+                title = data.title;
             }
 
             $.notify({

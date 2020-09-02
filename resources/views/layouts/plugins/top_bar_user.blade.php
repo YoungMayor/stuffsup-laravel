@@ -1,52 +1,55 @@
 @extends('layouts.top_bar')
 
+@push('scripts')
+    @js_m(vue_apps/notifications)
+@endpush
+
 @section('menu')
-<li class="nav-item dropdown no-arrow mx-1" role="presentation">
+<li
+    data-count-link="{{ route('api.get_notification_count', [
+        'user' => Auth::user()->name
+    ]) }}"
+    class="nav-item dropdown no-arrow mx-1"
+    role="presentation"
+    id="notification-center">
     <div class="nav-item dropdown no-arrow">
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-            aria-expanded="false" type="button">
-            <span class="badge badge-danger badge-counter">3+</span>
+        <button
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="false"
+            type="button">
+            <span class="badge badge-danger badge-counter">
+                <i class="fas fa-spinner fa-spin" v-if="getting_count"></i>
+                <template v-else>
+                    @{{ notification_count }}
+                </template>
+            </span>
             <i class="fas fa-bell fa-fw"></i>
         </button>
+
         <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
             role="menu">
-            <h6 class="dropdown-header">alerts center</h6>
-            <a class="d-flex align-items-center dropdown-item" href="#">
-                <div class="mr-3">
-                    <div class="bg-primary icon-circle">
-                        <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <span class="small text-gray-500">December 12, 2019</span>
-                    <p>A new monthly report is ready to download!</p>
-                </div>
+            <h6 class="dropdown-header">
+                Alerts Center
+            </h6>
+
+            <notification-card
+                v-for="notification, key in notifications"
+                :key="key"
+                :notification="notification"
+            ></notification-card>
+
+            <a class="text-center dropdown-item small text-gray-500" href="#">
+                Show All Alerts
             </a>
-            <a class="d-flex align-items-center dropdown-item" href="#">
-                <div class="mr-3">
-                    <div class="bg-success icon-circle">
-                        <i class="fas fa-donate text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <span class="small text-gray-500">December 7, 2019</span>
-                    <p>$290.29 has been deposited into your account!</p>
-                </div>
-            </a>
-            <a class="d-flex align-items-center dropdown-item" href="#">
-                <div class="mr-3">
-                    <div class="bg-warning icon-circle">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <span class="small text-gray-500">December 2, 2019</span>
-                    <p>Spending Alert: We've noticed unusually high spending for your account.
-                    </p>
-                </div>
-            </a>
-            <a class="text-center dropdown-item small text-gray-500" href="#">Show All
-                Alerts</a>
+
+            <content-loader
+                :list="notifications"
+                target="{{ route('api.get_notifications', [
+                    'user' => Auth::user()->name
+                ]) }}"
+                :show_button="false"
+            ></content-loader>
         </div>
     </div>
 </li>

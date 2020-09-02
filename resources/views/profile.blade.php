@@ -164,7 +164,7 @@ Agent Profile
                                 icon="fas fa-store-alt"
                                 label="More Reviews"
                                 target="{{ $user->received_reviews_peek_link }}"
-                                class="d-none"
+                                :show_button="false"
                             ></content-loader>
 
                             <a
@@ -230,7 +230,7 @@ Agent Profile
                     icon="fas fa-store-alt"
                     label="More Sales"
                     target="{{ $user->user_sales_peek_link }}"
-                    class="d-none"
+                    :show_button="false"
                 ></content-loader>
             </div>
         </div>

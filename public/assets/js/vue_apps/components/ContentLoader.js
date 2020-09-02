@@ -21,6 +21,10 @@ export default {
         icon: {
             type: String,
             default: null
+        },
+        show_button: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -28,7 +32,8 @@ export default {
         return {
             item_count: 1,
             is_loading: false,
-            list_ended: false
+            list_ended: false,
+            content_link: ''
         }
     },
 
@@ -40,12 +45,12 @@ export default {
                 return;
             }
 
-            axios.post(bar.target)
+            axios.post(bar.content_link)
                 .then(function(response) {
                     var data = response.data;
 
                     if (data.links && data.links.next) {
-                        bar.target = data.links.next;
+                        bar.content_link = data.links.next;
                     } else {
                         bar.list_ended = true;
                     }
@@ -73,11 +78,12 @@ export default {
     },
 
     mounted: function() {
+        this.content_link = this.target;
         this.retrieve()
     },
 
     template: `
-<div class="col-12 text-center p-2">
+<div class="col-12 text-center p-2" v-if="show_button">
     <button
         class="btn rounded-pill shadow-sm"
         :class="button_class"
