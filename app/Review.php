@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Events\ReviewMade;
-use App\Events\ReviewUpdated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,11 +18,6 @@ class Review extends Model
     // public $timestamps = false;
 
     protected $guarded = [];
-
-    protected $dispatchesEvents = [
-        'created' => ReviewMade::class,
-        'updated' => ReviewUpdated::class
-    ];
 
     public function getRouteKeyName()
     {
