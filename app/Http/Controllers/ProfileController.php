@@ -25,11 +25,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    protected function getSales()
-    {
-        //
-    }
-
     public function peekMarket(Request $request, User $user)
     {
         return new SaleCollection($user->sales()->ongoingSales()->inRandomOrder()->limit(3)->get());
@@ -42,6 +37,8 @@ class ProfileController extends Controller
 
     public function showEditor(Request $request)
     {
-        //
+        return view(RouteServiceProvider::VIEWS['profile_edit'], [
+            'user' => Auth::user()
+        ]);
     }
 }

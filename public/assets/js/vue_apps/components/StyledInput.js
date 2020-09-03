@@ -36,6 +36,10 @@ export default {
         step: {
             type: Number,
         },
+        value: {
+            type: String,
+            default: ''
+        }
     },
 
     data() {
@@ -73,7 +77,8 @@ export default {
         :min="min"
         :max="max"
         :step="step"
-        :pattern="pattern">
+        :pattern="pattern"
+        :value="value">
 </div>
     `
 };

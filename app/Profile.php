@@ -47,4 +47,32 @@ class Profile extends Model
     {
         return "/assets/img/profile.jpg";
     }
+
+    public function getEditAboutLinkAttribute()
+    {
+        return route('profile.edit.about', [
+            'token' => $this->user->generateToken('edit about'),
+        ]);
+    }
+
+    public function getEditContactLinkAttribute()
+    {
+        return route('profile.edit.contact', [
+            'token' => $this->user->generateToken('edit contact'),
+        ]);
+    }
+
+    public function getEditLocationLinkAttribute()
+    {
+        return route('profile.edit.location', [
+            'token' => $this->user->generateToken('edit location'),
+        ]);
+    }
+
+    public function getEditPasswordLinkAttribute()
+    {
+        return route('profile.edit.password', [
+            'token' => $this->user->generateToken('edit password'),
+        ]);
+    }
 }

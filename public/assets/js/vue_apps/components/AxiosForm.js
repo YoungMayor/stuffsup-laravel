@@ -65,6 +65,9 @@ export default {
                 if (!bar.form.dataset.dontreset) {
                     bar.form.reset();
                 }
+                if (data.reload) {
+                    window.location.reload();
+                }
             }).catch(function(error) {
                 if (!error.response) {
                     // console.log(error)

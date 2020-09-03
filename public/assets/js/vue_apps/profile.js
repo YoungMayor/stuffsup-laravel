@@ -5,7 +5,7 @@ import ContentLoader from './components/ContentLoader.js';
 import AxiosForm from './components/AxiosForm.js';
 import ReviewCard from './components/Profile/ReviewCard.js';
 
-Window.OFFER = new Vue({
+Window.PROFILE = new Vue({
     el: "#agent-profile",
 
     mixins: [
@@ -38,4 +38,4 @@ Window.OFFER = new Vue({
     }
 });
 
-export default Window.OFFER;
+export default Window.PROFILE;

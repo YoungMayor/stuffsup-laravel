@@ -58,7 +58,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
     Route::get('/profile', 'ProfileController@selfProfile')->name('profile.self');
-    Route::get('/profile/edit', 'ProfileController@showEditor')->name('profile.edit');
+    Route::get('/profile/edit', 'ProfileController@showEditor')->name('profile.edit')->middleware('password.confirm');
+
+    Route::post('/profile/edit/{token}/about', 'ProfileEditController@editAbout')->name('profile.edit.about');
+    Route::post('/profile/edit/{token}/contact', 'ProfileEditController@editContact')->name('profile.edit.contact');
+    Route::post('/profile/edit/{token}/location', 'ProfileEditController@editLocation')->name('profile.edit.location');
+    Route::post('/profile/edit/{token}/password', 'ProfileEditController@editPassword')->name('profile.edit.password');
 
     Route::post('/agent/{user}/create/review', 'ReviewController@createReview')->name('user.create.review');
     Route::post('/agent/{user}/create/report', 'ReportController@createReport')->name('user.create.report');

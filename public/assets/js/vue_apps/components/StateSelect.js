@@ -16,11 +16,19 @@ export default {
             type: Boolean,
             default: true
         },
+        with_nation: {
+            type: Boolean,
+            default: true
+        },
+        value: {
+            type: String,
+            default: ''
+        }
     },
 
     data() {
         return {
-            //
+            all_states: Window.States
         }
     },
 
@@ -48,13 +56,14 @@ export default {
         :id="name"
         :name="name"
         :required="required">
-        <option value="0">
+        <option value="0" v-if="with_nation">
             Nationwide
         </option>
         <optgroup label="Select State">
             <option
-                v-for="details, key in Window.States"
-                :value="key">
+                v-for="details, key in all_states"
+                :value="key"
+                :selected="key == value">
                 {{ details.name }}
             </option>
         </optgroup>

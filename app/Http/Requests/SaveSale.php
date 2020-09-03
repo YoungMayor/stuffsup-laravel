@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Providers\StateMapServiceProvider;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class SaveSale extends FormRequest
 {
@@ -13,7 +16,7 @@ class SaveSale extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -58,7 +61,8 @@ class SaveSale extends FormRequest
                 'min:1'
             ],
             'location.*.state' => [
-                'required'
+                'required',
+                Rule::in(array_keys(StateMapServiceProvider::$___state_map))
             ],
             'location.*.region' => [
                 'required',

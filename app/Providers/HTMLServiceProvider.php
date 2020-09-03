@@ -114,6 +114,10 @@ HTML_;
         Blade::directive("imgURL", function ($expression) {
             return asset("$this->imgPATH/$expression");
         });
+
+        Blade::directive("brline", function($expression){
+            return "<?php echo nl2br(htmlspecialchars($expression)); ?>";
+        });
     }
 
     protected function assetVersion($str, &$fileName = "", &$version = 1)
